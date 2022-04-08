@@ -1,0 +1,30 @@
+.logo {
+  font-family: "Great Vibes", cursive;
+  color: white;
+  font-size: 3rem;
+}
+
+.logo > * {
+  color: var(--COLOR-COMPLEMENTARY-LIGHT);
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.text-stroke {
+  font-weight: initial;
+}
+
+.hero-description {
+  font-weight: 600;
+}
+
+.complementary-color-text {
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--COLOR-COMPLEMENTARY);
+}
+
+.underlined-text {
+  text-decoration: underline;
+}
+
