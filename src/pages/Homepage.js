@@ -6,9 +6,9 @@ export const Homepage = () => {
   const location = useLocation();
   return (
     <>
-      <div className="notefeed-layout row-flex no-wrap flex-start">
+      <div className="video-layout row-flex no-wrap flex-start">
         <Sidebar />
-        <main className="videos-content p-h-5">
+        <main className="videos-content">
           {location.pathname === "/" && <AllVideosFeed />}
 
           {/* NOTE: Will be uncommenting after adding pages */}

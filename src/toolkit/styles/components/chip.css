@@ -1,0 +1,34 @@
+.categories-container {
+  background: var(--COLOR-PRIMARY-XLIGHT);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+  justify-content: start;
+}
+
+.chip {
+  display: inline-block;
+  color: var(--COLOR-WHITE);
+  background: var(--COLOR-PRIMARY-MID);
+  border-radius: 1.6rem;
+  padding: 0.15rem 1rem;
+  transition: background 0.5s ease;
+}
+
+.chip:hover {
+  background: var(--COLOR-PRIMARY-SAT);
+}
+
+.chip-active {
+  background: var(--COLOR-PRIMARY-XXDARK);
+}
+
+@media screen and (max-width: 550px) {
+  .categories-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .chip {
+    margin: 1rem;
+  }
+}
