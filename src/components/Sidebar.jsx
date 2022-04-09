@@ -8,8 +8,7 @@ export const Sidebar = () => {
   return (
     <div className={`side-bar video-sidebar w-20p ${showFilterBar ? "show-filter" : ""}`}>
       <ul className="sidebar-items no-bullet col-flex flex-start no-wrap p-h-2 m-v-3">
-        {sidebarData?.map(({ _id, title, link, icon }) => {
-          const Icon = icon;
+        {sidebarData?.map(({ _id, title, link, icon: Icon }) => {
           return (
             <Link
               to={link}
