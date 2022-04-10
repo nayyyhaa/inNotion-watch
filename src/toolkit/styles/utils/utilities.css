@@ -1,0 +1,39 @@
+.rating-icon {
+  font-size: unset !important;
+}
+
+.card-img {
+  height: 30vh;
+}
+
+.badge {
+  height: 2rem;
+  width: 2rem;
+  bottom: 70%;
+  left: 65%;
+}
+
+.card-rating-overlay {
+  bottom: 20rem;
+}
+
+.m-r-3 {
+  margin-right: 3rem;
+}
+
+.heart-btn {
+  position: absolute;
+  left: 85%;
+  top: 2%;
+  color: var(--COLOR-COMPLEMENTARY-DARK);
+  background: transparent;
+}
+
+.heart-btn:hover {
+  color: var(--RED);
+  background: var(--COLOR-GREY-TRANS);
+}
+
+.flex-1 {
+  flex: 1;
+}

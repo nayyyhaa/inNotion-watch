@@ -1,0 +1,15 @@
+@import url("./utils/fonts.css");
+@import url("./utils/utilities.css");
+
+@import url("./components/all-videos.css");
+@import url("./components/chip.css");
+@import url("./components/login.css");
+@import url("./components/nav.css");
+@import url("./components/video.css");
+@import url("./components/footer.css");
+
+/* override mockman styles */
+.title {
+  border-bottom: none;
+  width: initial;
+}

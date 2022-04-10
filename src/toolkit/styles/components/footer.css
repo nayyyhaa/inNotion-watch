@@ -1,0 +1,9 @@
+.page-footer {
+  background: var(--COLOR-PRIMARY-XXLIGHT);
+}
+
+@media screen and (max-width: 400px) {
+  .page-footer {
+    flex-wrap: wrap;
+  }
+}

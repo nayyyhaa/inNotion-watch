@@ -1,9 +1,12 @@
-import "./App.css";
+import { Homepage } from "pages";
+import { Footer, Navbar } from "components";
 
 function App() {
   return (
     <div className="App">
-      Hello world!
+      <Navbar />
+      <Homepage />
+      <Footer />
     </div>
   );
 }
