@@ -22,7 +22,7 @@
   background: var(--COLOR-PRIMARY-XXDARK);
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 750px) {
   .categories-container {
     padding-left: 2rem;
     padding-right: 2rem;

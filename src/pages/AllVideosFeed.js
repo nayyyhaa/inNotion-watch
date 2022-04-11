@@ -1,18 +1,27 @@
+import { getCategories, getFilteredVideos } from "toolkit/utils";
+import { useVideo } from "contexts";
 import { Chip, Video } from "components";
-import videoData from "toolkit/data/videoData";
-import { getCategories } from "toolkit/utils";
+import { useState } from "react";
 
 export const AllVideosFeed = () => {
-  const categories = getCategories(videoData);
+  const { videos } = useVideo();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const categories = getCategories(videos);
+  const filteredVideos = getFilteredVideos(videos, selectedCategory);
   return (
     <>
       <div className="categories-container row-flex p-h-5">
         {categories.map((category) => (
-          <Chip category={category} />
+          <Chip
+            key={category}
+            category={category}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         ))}
       </div>
       <div className="grid-3-col full-wd m-auto row-flex align-start p-v-2 p-h-5 m-t-3">
-        {videoData?.map((video) => (
+        {filteredVideos?.map((video) => (
           <Video key={video._id} video={video} />
         ))}
       </div>

@@ -2,6 +2,10 @@
   background: var(--COLOR-PRIMARY-XXLIGHT);
 }
 
+.icon-btn:hover {
+  color: var(--COLOR-PRIMARY);
+}
+
 @media screen and (max-width: 400px) {
   .page-footer {
     flex-wrap: wrap;

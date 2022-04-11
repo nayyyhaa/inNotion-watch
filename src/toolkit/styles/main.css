@@ -8,6 +8,14 @@
 @import url("./components/video.css");
 @import url("./components/footer.css");
 
+.no-video {
+  opacity: 0.5;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /* override mockman styles */
 .title {
   border-bottom: none;

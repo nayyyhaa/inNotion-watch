@@ -1,4 +1,3 @@
-// import { faTrashCan, faHome, faArchive, faTags } from "@fortawesome/free-solid-svg-icons";
 import { BiHome, BiTrendingUp, BiLike } from "react-icons/bi";
 import { MdPlaylistPlay, MdWatchLater, MdHistory } from "react-icons/md";
 
