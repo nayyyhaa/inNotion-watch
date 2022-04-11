@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
-import { SidebarProvider } from "contexts/SidebarContext";
+import { SidebarProvider, VideoProvider, WatchLaterProvider } from "contexts";
 
 // Call make Server
 makeServer();
@@ -12,9 +12,13 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <SidebarProvider>
-        <App />
-      </SidebarProvider>
+      <VideoProvider>
+        <WatchLaterProvider>
+          <SidebarProvider>
+            <App />
+          </SidebarProvider>
+        </WatchLaterProvider>
+      </VideoProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

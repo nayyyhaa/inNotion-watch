@@ -37,3 +37,9 @@
 .flex-1 {
   flex: 1;
 }
+
+@media screen and (max-width: 1000px) {
+  .grid-3-col {
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  }
+}
