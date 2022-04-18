@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
-import { SidebarProvider, VideoProvider, WatchLaterProvider } from "contexts";
+import { SidebarProvider, VideoProvider, WatchLaterProvider, PlaylistProvider } from "contexts";
+import { ModalProvider } from "contexts/ModalContext";
 
 // Call make Server
 makeServer();
@@ -14,9 +15,13 @@ ReactDOM.render(
     <Router>
       <VideoProvider>
         <WatchLaterProvider>
-          <SidebarProvider>
-            <App />
-          </SidebarProvider>
+          <PlaylistProvider>
+            <SidebarProvider>
+              <ModalProvider>
+                <App />
+              </ModalProvider>
+            </SidebarProvider>
+          </PlaylistProvider>
         </WatchLaterProvider>
       </VideoProvider>
     </Router>
