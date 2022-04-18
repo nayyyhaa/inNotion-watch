@@ -1,30 +1,30 @@
-import { PlaylistModal, Sidebar } from "components";
-import { useModal } from "contexts";
-import { useLocation } from "react-router-dom";
-import { AllVideosFeed } from "./AllVideosFeed";
-import { PlaylistFeed } from "./PlaylistFeed";
-import { PlaylistVideos } from "./PlaylistVideos";
-import { WatchLaterFeed } from "./WatchLaterFeed";
+import { getCategories, getFilteredVideos } from "toolkit/utils";
+import { useVideo } from "contexts";
+import { Chip, Video } from "components";
+import { useState } from "react";
 
 export const Homepage = () => {
-  const location = useLocation();
-  const { showModal } = useModal();
+  const { videos } = useVideo();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const categories = getCategories(videos);
+  const filteredVideos = getFilteredVideos(videos, selectedCategory);
   return (
     <>
-      {/* <div className="video-layout row-flex no-wrap flex-start">
-        <Sidebar />
-        {showModal && <PlaylistModal />}
-        <main className="videos-content"> */}
-          <AllVideosFeed />
-          {/* {location.pathname === "/playlist-feed" && <PlaylistFeed />} */}
-          {/* {location.pathname === "/playlist-feed/:id" && <PlaylistVideos />} */}
-          {/* {location.pathname === "/watch-later-feed" && <WatchLaterFeed />} */}
-          {/* NOTE: Will be uncommenting after adding pages */}
-          {/* {location.pathname === "/trending-feed" && <TrendingFeed />}
-          {location.pathname === "/liked-feed" && <LikedFeed />}
-          {location.pathname === "/history-feed" && <HistoryFeed />} */}
-        {/* </main>
-      </div> */}
+      <div className="categories-container row-flex p-h-5">
+        {categories.map((category) => (
+          <Chip
+            key={category}
+            category={category}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        ))}
+      </div>
+      <div className="grid-3-col full-wd m-auto row-flex align-start p-v-2 p-h-5 m-t-3">
+        {filteredVideos?.map((video) => (
+          <Video key={video._id} video={video} />
+        ))}
+      </div>
     </>
   );
 };
