@@ -74,6 +74,9 @@
   color: var(--BLACK-TRANS);
 }
 
+.playlist-video {
+  border: 1px solid var(--COLOR-GREY);
+}
 
 @media screen and (max-width: 768px) {
   .playlist-videos {

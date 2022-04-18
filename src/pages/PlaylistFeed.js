@@ -19,7 +19,7 @@ export const PlaylistFeed = () => {
         : key
     );
   }, []);
-  
+
   let playListNames = Object.keys(playlist).filter((key) => playlist[key].length > 0);
 
   return (
@@ -32,7 +32,7 @@ export const PlaylistFeed = () => {
       >
         {playListNames?.length > 0 ? (
           playListNames?.map((list) => (
-            <Link to={`${list}`} key={list} className="video m-2">
+            <Link to={`${list}`} key={list} className="playlist-video video m-2">
               <div className="video-content">
                 <img className="video-img playlist-img" src={playlist[list][0].thumbnail} alt="thumbnail" />
                 <div className="playlist-info row-flex">
