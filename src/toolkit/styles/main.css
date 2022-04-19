@@ -5,6 +5,7 @@
 @import url("./components/chip.css");
 @import url("./components/login.css");
 @import url("./components/nav.css");
+@import url("./components/playlist.css");
 @import url("./components/video.css");
 @import url("./components/footer.css");
 
@@ -20,4 +21,25 @@
 .title {
   border-bottom: none;
   width: initial;
+}
+
+.close-btn:hover {
+  color: var(--RED);
+  background: var(--RED-LIGHT);
+}
+
+.modal {
+  position: relative;
+  height: fit-content;
+  min-height: 35vh;
+  max-width: 36rem;
+}
+
+.delete-btn {
+  color: var(--RED);
+}
+
+.delete-btn:hover {
+  color: var(--RED);
+  background: var(--RED-LIGHT);
 }

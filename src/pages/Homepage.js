@@ -1,24 +1,29 @@
-import { Sidebar } from "components";
-import { useLocation } from "react-router-dom";
-import { AllVideosFeed } from "./AllVideosFeed";
-import { WatchLaterFeed } from "./WatchLaterFeed";
+import { getCategories, getFilteredVideos } from "toolkit/utils";
+import { useVideo } from "contexts";
+import { Chip, Video } from "components";
+import { useState } from "react";
 
 export const Homepage = () => {
-  const location = useLocation();
+  const { videos } = useVideo();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const categories = getCategories(videos);
+  const filteredVideos = getFilteredVideos(videos, selectedCategory);
   return (
     <>
-      <div className="video-layout row-flex no-wrap flex-start">
-        <Sidebar />
-        <main className="videos-content">
-          {location.pathname === "/" && <AllVideosFeed />}
-
-          {location.pathname === "/watch-later-feed" && <WatchLaterFeed />}
-          {/* NOTE: Will be uncommenting after adding pages */}
-          {/* {location.pathname === "/trending-feed" && <TrendingFeed />}
-          {location.pathname === "/liked-feed" && <LikedFeed />}
-          {location.pathname === "/playlist-feed" && <PlaylistFeed />}
-          {location.pathname === "/history-feed" && <HistoryFeed />} */}
-        </main>
+      <div className="categories-container row-flex p-h-5">
+        {categories.map((category) => (
+          <Chip
+            key={category}
+            category={category}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        ))}
+      </div>
+      <div className="grid-3-col full-wd m-auto row-flex align-start p-v-2 p-h-5 m-t-3">
+        {filteredVideos?.map((video) => (
+          <Video key={video._id} video={video} />
+        ))}
       </div>
     </>
   );

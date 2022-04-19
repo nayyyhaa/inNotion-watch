@@ -1,0 +1,91 @@
+.modal-close-btn {
+  left: 85%;
+  position: absolute;
+  top: 5%;
+}
+
+.note-tagfield {
+  align-items: center;
+  background: #fff;
+  border: 2px solid var(--COLOR-PRIMARY-XLIGHT);
+  border-radius: 4px;
+  display: flex;
+}
+
+.tag-selector {
+  border: none;
+  outline: none;
+}
+
+.playlist-img {
+  opacity: 0.8;
+}
+
+.playlist-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  color: white;
+  border-radius: 5px;
+  text-shadow: 1px 1px 4px black;
+  background: var(--BLACK-TRANS);
+}
+
+.playlist-info > svg {
+  align-self: center;
+}
+
+.playlist-info > * {
+  font-size: 2.5rem !important;
+}
+
+.video-content {
+  position: relative;
+}
+
+.card {
+  position: relative;
+}
+
+.cart-card-img {
+  align-self: start;
+}
+
+.card-close-btn {
+  right: 2%;
+  left: unset;
+  position: absolute;
+  top: 5%;
+}
+
+.card-footer {
+  height: inherit;
+  align-items: end;
+  padding-bottom: 1rem;
+  justify-content: start;
+}
+
+.card-btn:hover,
+.card-icon-btn:hover {
+  color: var(--BLACK-TRANS);
+}
+
+.playlist-video {
+  border: 1px solid var(--COLOR-GREY);
+}
+
+@media screen and (max-width: 768px) {
+  .playlist-videos {
+    padding: 1rem 0rem;
+  }
+
+  .cart-card-img,
+  .cart-card,
+  .card-header-text {
+    height: 16rem;
+  }
+}
