@@ -11,7 +11,7 @@ export const Navbar = () => {
         >
           <i className="fa fa-bars" aria-hidden="true"></i>
         </div>
-        <a className="m-l-3" href="/">
+        <a className="m-l-3" href="/home">
           <h3 className="logo">
             in.notion <span className="text-shd">watch</span>
           </h3>
@@ -25,7 +25,7 @@ export const Navbar = () => {
         <div className="nav-icon-btns row-flex no-wrap">
           <ul className="row-flex no-bullet m-r-3">
             <li className="nav-icon-btn icon-btn rd-bdr grid-ctr wt-text">
-              <a href="/" className="grid-ctr">
+              <a href="/home" className="grid-ctr">
                 <i className="fa fa-user" aria-hidden="true"></i>
                 <span className="nav-icon-text h6 cursor wt-text">Profile</span>
               </a>

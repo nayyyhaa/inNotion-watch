@@ -1,5 +1,4 @@
 export const playlistReducer = (state, action) => {
-  // const index = state.findIndex((el) => el._id === action.payload._id);
   switch (action.type) {
     case "ADD_NEW_PLAYLIST":
       return { ...state, [action.payload.title]: [action.payload.video] };

@@ -13,7 +13,7 @@ export const Sidebar = () => {
             <Link
               to={link}
               key={_id}
-              className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname === link ? "active-sidebar" : ""}`}
+              className={`filter-list cursor p-l-2 p-1 full-wd ${location.pathname.includes(link) ? "active-sidebar" : ""}`}
               onClick={() => setShowFilterBar(false)}
             >
               <Icon />

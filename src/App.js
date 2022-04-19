@@ -12,7 +12,7 @@ function App() {
         {showModal && <PlaylistModal />}
         <main className="videos-content">
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/home" element={<Homepage />} />
             <Route path="/playlist-feed" element={<PlaylistFeed />} />
             <Route path="/watch-later-feed" element={<WatchLaterFeed />} />
             <Route path="/playlist-feed/:id" element={<PlaylistVideos />} />
