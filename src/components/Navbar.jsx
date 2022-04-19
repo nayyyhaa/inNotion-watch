@@ -1,4 +1,5 @@
 import { useSidebar } from "contexts/SidebarContext";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const { setShowFilterBar } = useSidebar();
@@ -11,11 +12,11 @@ export const Navbar = () => {
         >
           <i className="fa fa-bars" aria-hidden="true"></i>
         </div>
-        <a className="m-l-3" href="/home">
+        <Link className="m-l-3" to="/">
           <h3 className="logo">
             in.notion <span className="text-shd">watch</span>
           </h3>
-        </a>
+        </Link>
         <label className="field searchfield w-30p" htmlFor="search-text">
           <span className="search-icon cursor p-h-1">
             <i className="fa fa-search" aria-hidden="true"></i>
@@ -25,10 +26,10 @@ export const Navbar = () => {
         <div className="nav-icon-btns row-flex no-wrap">
           <ul className="row-flex no-bullet m-r-3">
             <li className="nav-icon-btn icon-btn rd-bdr grid-ctr wt-text">
-              <a href="/home" className="grid-ctr">
+              <Link to="/" className="grid-ctr">
                 <i className="fa fa-user" aria-hidden="true"></i>
                 <span className="nav-icon-text h6 cursor wt-text">Profile</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
