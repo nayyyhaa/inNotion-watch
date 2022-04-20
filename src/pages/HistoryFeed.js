@@ -7,7 +7,7 @@ export const HistoryFeed = () => {
   return (
     <>
       <h1 className="title colored-text centered-text m-t-3">History</h1>
-      <div className="full-wd m-auto row-flex align-start p-v-2 p-h-5 m-t-3">
+      <div className="history-videos full-wd m-auto row-flex align-start p-v-2 p-h-5 m-t-3">
         {history.length > 0 ? (
           history?.map((video) => <VideoCard key={video._id} video={video} cardData="history" />)
         ) : (

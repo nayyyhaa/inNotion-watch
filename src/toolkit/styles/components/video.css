@@ -75,6 +75,9 @@
 }
 
 .video-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 7rem;
   color: var(--BLACK);
   transition: all 0.3s ease;
 }

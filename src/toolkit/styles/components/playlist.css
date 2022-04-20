@@ -84,8 +84,14 @@
 }
 
 @media screen and (max-width: 768px) {
-  .playlist-videos {
+  .playlist-videos,
+  .history-videos,
+  .liked-videos {
     padding: 1rem 0rem;
+  }
+
+  .card-header-text {
+    padding: 1rem 0 0 1rem;
   }
 
   .video-card-img,
