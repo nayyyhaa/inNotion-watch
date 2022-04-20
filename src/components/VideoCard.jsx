@@ -1,15 +1,37 @@
-import { useLikes, useModal, usePlaylist, useWatchLater } from "contexts";
+import { useHistory, useLikes, useModal, usePlaylist, useWatchLater } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-export const VideoCard = ({ video, label }) => {
+export const VideoCard = ({ video, label, cardData }) => {
   const { _id, thumbnail, shortTitle, creator, views, creatorThumbnail } = video;
   const { setShowModal, setModalData } = useModal();
   const { watchList, dispatchWatchList } = useWatchLater();
   const { dispatchLikes } = useLikes();
   const { dispatchPlaylist } = usePlaylist();
+  const { dispatchHistory } = useHistory();
   const index = watchList.findIndex((el) => el._id === video._id);
+
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    switch (cardData) {
+      case "history":
+        return dispatchHistory({ type: "REMOVE_FROM_HISTORY", payload: video });
+      case "liked":
+        return dispatchLikes({ type: "TOGGLE_LIKES", payload: video });
+      case "playlist":
+        return dispatchPlaylist({
+          type: "SET_TO_PLAYLIST",
+          payload: {
+            title: label,
+            _id: video._id,
+            video: video,
+          },
+        });
+      default:
+        return null;
+    }
+  };
   return (
     <>
       <div className="card hz-card video-card left-text row-flex text-wrap w-80p h-20rm m-v-2">
@@ -19,19 +41,7 @@ export const VideoCard = ({ video, label }) => {
         <button
           type="button"
           className="card-icon-btn icon-btn rd-bdr close-btn card-close-btn"
-          onClick={(e) => {
-            e.preventDefault();
-            label
-              ? dispatchPlaylist({
-                  type: "SET_TO_PLAYLIST",
-                  payload: {
-                    title: label,
-                    _id: video._id,
-                    video: video,
-                  },
-                })
-              : dispatchLikes({ type: "TOGGLE_LIKES", payload: video });
-          }}
+          onClick={(e) => deleteHandler(e)}
         >
           <MdClose />
         </button>

@@ -1,7 +1,8 @@
-import { useModal, usePlaylist, useWatchLater, useVideo, useLikes } from "contexts";
+import { useModal, useWatchLater, useVideo, useLikes, useHistory } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
@@ -9,22 +10,25 @@ export const SingleVideoFeed = () => {
   const video = videos.find((el) => el._id === id);
   const {
     _id,
-    thumbnail,
     shortTitle,
     description,
     creator,
-    category,
     views,
     creatorThumbnail,
     publishDate,
     subscribers,
-    trending,
   } = video;
   const { setShowModal, setModalData } = useModal();
   const { watchList, dispatchWatchList } = useWatchLater();
   const { likes, dispatchLikes } = useLikes();
+  const { dispatchHistory } = useHistory();
   const watchLaterIndex = watchList.findIndex((el) => el._id === video._id);
   const likesIndex = likes.findIndex((el) => el._id === video._id);
+
+  useEffect(() => {
+    dispatchHistory({ type: "ADD_TO_HISTORY", payload: video });
+  }, [video]);
+
   return (
     <div className="single-video-page w-70p m-2">
       <div className="video-embedded m-b-2">

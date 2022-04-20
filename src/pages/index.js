@@ -5,3 +5,4 @@ export { WatchLaterFeed } from "./WatchLaterFeed";
 export { TrendingFeed } from "./TrendingFeed";
 export { SingleVideoFeed } from "./SingleVideoFeed";
 export { LikedFeed } from "./LikedFeed";
+export { HistoryFeed } from "./HistoryFeed";
