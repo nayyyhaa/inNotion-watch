@@ -49,9 +49,14 @@
 
 .card {
   position: relative;
+  color: var(--BLACK);
 }
 
-.cart-card-img {
+.card:hover {
+  box-shadow: none;
+}
+
+.video-card-img {
   align-self: start;
 }
 
@@ -79,12 +84,18 @@
 }
 
 @media screen and (max-width: 768px) {
-  .playlist-videos {
+  .playlist-videos,
+  .history-videos,
+  .liked-videos {
     padding: 1rem 0rem;
   }
 
-  .cart-card-img,
-  .cart-card,
+  .card-header-text {
+    padding: 1rem 0 0 1rem;
+  }
+
+  .video-card-img,
+  .video-card,
   .card-header-text {
     height: 16rem;
   }

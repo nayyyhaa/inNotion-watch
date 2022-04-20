@@ -25,6 +25,10 @@
   justify-content: start;
 }
 
+.video-info-title {
+  justify-content: space-between;
+}
+
 .creater-thumbnail {
   overflow: visible;
   align-self: start;
@@ -70,6 +74,45 @@
   display: flex;
 }
 
-.video-option > p > svg {
+.video-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 7rem;
+  color: var(--BLACK);
+  transition: all 0.3s ease;
+}
+
+.video-title:hover {
+  color: var(--COLOR-PRIMARY);
+}
+
+svg {
   align-self: center;
+}
+
+.video-actions > p {
+  padding-left: 2rem;
+}
+
+.video-embedded {
+  padding-bottom: 56.25%;
+  position: relative;
+  background: var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.video-img,
+.video-card-img {
+  background: var(--COLOR-PRIMARY-XLIGHT);
+}
+
+.video-embedded iframe {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .single-video-page {
+    width: 85%;
+  }
 }

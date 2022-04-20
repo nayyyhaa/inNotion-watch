@@ -42,6 +42,14 @@
   padding-top: 2rem;
 }
 
+.w-70p {
+  width: 70%;
+}
+
+.line-decoration {
+  height: 0.1rem;
+}
+
 @media screen and (max-width: 1000px) {
   .grid-3-col {
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));

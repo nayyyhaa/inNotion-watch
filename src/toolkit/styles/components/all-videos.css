@@ -18,6 +18,7 @@
 }
 
 .filter-list {
+  display: flex;
   border-radius: 4px;
   color: var(--COLOR-GREY-DARK);
   font-size: 1.7rem;

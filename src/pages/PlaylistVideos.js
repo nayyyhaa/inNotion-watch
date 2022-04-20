@@ -12,7 +12,7 @@ export const PlaylistVideos = () => {
       <h3 className="title centered-text">{id}</h3>
       <div className="playlist-videos full-wd m-auto row-flex align-start p-v-2 p-h-5 m-t-3">
         {playlist[id].length > 0 ? (
-          playlist[id]?.map((video) => <VideoCard key={video._id} video={video} label={id} />)
+          playlist[id]?.map((video) => <VideoCard key={video._id} video={video} label={id} cardData="playlist" />)
         ) : (
           <div className="grid-ctr m-v-5">
             <img className="w-60p no-video" src={noVideo} alt="no playlist" />
