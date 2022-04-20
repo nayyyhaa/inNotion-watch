@@ -49,9 +49,14 @@
 
 .card {
   position: relative;
+  color: var(--BLACK);
 }
 
-.cart-card-img {
+.card:hover {
+  box-shadow: none;
+}
+
+.video-card-img {
   align-self: start;
 }
 
@@ -83,8 +88,8 @@
     padding: 1rem 0rem;
   }
 
-  .cart-card-img,
-  .cart-card,
+  .video-card-img,
+  .video-card,
   .card-header-text {
     height: 16rem;
   }

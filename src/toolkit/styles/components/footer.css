@@ -8,6 +8,13 @@
 
 @media screen and (max-width: 400px) {
   .page-footer {
+    flex-direction: column;
     flex-wrap: wrap;
+    justify-content: end;
+    align-items:end;
+  }
+
+  .contact-socials {
+    margin-right: 0;
   }
 }
