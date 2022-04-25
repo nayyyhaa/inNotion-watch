@@ -1,17 +1,23 @@
+import { useAuth } from "contexts";
 import { useSidebar } from "contexts/SidebarContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const { setShowFilterBar } = useSidebar();
+  const location = useLocation();
+  const { auth } = useAuth();
+  const isSidebarVisible = !(location.pathname.includes("login") || location.pathname.includes("signup"));
   return (
     <header className="header fixed-header">
       <nav className="navbar row-flex w-95p m-auto p-05">
-        <div
-          className="hamburger icon-toggle icon-btn rd-bdr grid-ctr wt-text m-l-3"
-          onClick={() => setShowFilterBar((prev) => !prev)}
-        >
-          <i className="fa fa-bars" aria-hidden="true"></i>
-        </div>
+        {isSidebarVisible && (
+          <div
+            className="hamburger icon-toggle icon-btn rd-bdr grid-ctr wt-text m-l-3"
+            onClick={() => setShowFilterBar((prev) => !prev)}
+          >
+            <i className="fa fa-bars" aria-hidden="true"></i>
+          </div>
+        )}
         <Link className="m-l-3" to="/">
           <h3 className="logo">
             in.notion <span className="text-shd">watch</span>
@@ -26,7 +32,7 @@ export const Navbar = () => {
         <div className="nav-icon-btns row-flex no-wrap">
           <ul className="row-flex no-bullet m-r-3">
             <li className="nav-icon-btn icon-btn rd-bdr grid-ctr wt-text">
-              <Link to="/" className="grid-ctr">
+              <Link to={auth.isAuth ? `/profile` : `/login`} className="grid-ctr">
                 <i className="fa fa-user" aria-hidden="true"></i>
                 <span className="nav-icon-text h6 cursor wt-text">Profile</span>
               </Link>
