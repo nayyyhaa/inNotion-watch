@@ -17,6 +17,7 @@ import { useModal, useVideo } from "contexts";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useAsync } from "custom-hooks";
 import { PrivateRoute } from "routes/PrivateRoute";
+import Mockman from "mockman-js";
 function App() {
   const { showModal } = useModal();
   const { dispatchVideos } = useVideo();
@@ -50,6 +51,7 @@ function App() {
               <Route path="/playlist-feed/:id" element={<PlaylistVideos />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
+            <Route path="/mockman" element={<Mockman />} />
           </Routes>
         </main>
       </div>
