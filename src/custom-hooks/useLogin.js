@@ -1,13 +1,10 @@
 import { loginService, signupService } from "services";
 import { useNavigate } from "react-router-dom";
-// import { useToast } from "contexts/ToastContext";
 import { useAuth } from "contexts";
-// import { useNote } from "contexts/NoteContext";
+import { toast } from "react-toastify";
 
 export const useLogin = () => {
   const navigate = useNavigate();
-  // const { dispatchToast } = useToast();
-  // let { dispatchNote } = useNote();
   const { setAuth, setUser } = useAuth();
   const loginHandler = async (e, email, password) => {
     try {
@@ -18,14 +15,10 @@ export const useLogin = () => {
       localStorage.setItem("isAuth", true);
       localStorage.setItem("user", JSON.stringify(userData));
       setAuth({ token, isAuth: true });
-      // const notesRes = await getNoteService(token);
-      // dispatchNote({ type: "SET_ALL_NOTES", payload: notesRes });
+      toast.success(`Welcome ${userData.firstName}!`);
       navigate("/");
     } catch (err) {
-      // dispatchToast({
-      //   type: "SHOW_TOAST",
-      //   payload: { state: "error", msg: "User doesn't exists. Sign up now!" },
-      // });
+      toast.error("User doesn't exists. Sign up now!");
     }
   };
 
@@ -33,7 +26,6 @@ export const useLogin = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("isAuth");
     localStorage.removeItem("user");
-    // dispatchNote({ type: "SET_ALL_NOTES", payload: { allNotes: [], deletedNotes: [], archives: [] } });
     setAuth({ token: "", isAuth: false });
 
     navigate("/login");
@@ -48,12 +40,10 @@ export const useLogin = () => {
       localStorage.setItem("isAuth", true);
       localStorage.setItem("user", JSON.stringify(userData));
       setAuth({ token, isAuth: true });
+      toast.success(`Welcome ${userData.firstName}!`);
       navigate("/");
     } catch (err) {
-      // dispatchToast({
-      //   type: "SHOW_TOAST",
-      //   payload: { state: "error", msg: "User already exists! Try logging in." },
-      // });
+      toast.error("User already exists! Try logging in.");
     }
   };
   return { loginHandler, logoutHandler, signupHandler };
