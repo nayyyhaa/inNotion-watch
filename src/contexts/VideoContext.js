@@ -1,12 +1,20 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useReducer, useContext } from "react";
 import videoData from "toolkit/data/videoData";
 
 const VideoContext = createContext();
 
-const VideoProvider = ({ children }) => {
-  const [videos, setVideos] = useState(videoData);
+const videoReducer = (state, action) => {
+  switch (action.type) {
+    case "GET_ALL_VIDEOS":
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
-  return <VideoContext.Provider value={{ videos, setVideos }}>{children}</VideoContext.Provider>;
+const VideoProvider = ({ children }) => {
+  const [videos, dispatchVideos] = useReducer(videoReducer, []);
+  return <VideoContext.Provider value={{ videos, dispatchVideos }}>{children}</VideoContext.Provider>;
 };
 
 const useVideo = () => useContext(VideoContext);

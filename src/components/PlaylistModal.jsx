@@ -1,6 +1,8 @@
 import { useModal, usePlaylist } from "contexts";
 import { useState } from "react";
 import { MdClose, MdPlaylistAdd } from "react-icons/md";
+import { toast } from "react-toastify";
+
 export const PlaylistModal = () => {
   const { showModal, setShowModal, modalData } = useModal();
   const [playlistIp, setPlaylistIp] = useState("");
@@ -25,7 +27,9 @@ export const PlaylistModal = () => {
                     type="checkbox"
                     className="checkbox-input m-r-1"
                     checked={playlist[label].includes(modalData)}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      if(playlist[label].includes(modalData)) toast.info("Removed from Playlist");
+                      else toast.success("Added to Playlist");
                       dispatchPlaylist({
                         type: "SET_TO_PLAYLIST",
                         payload: {
@@ -33,8 +37,8 @@ export const PlaylistModal = () => {
                           _id: modalData._id,
                           video: modalData,
                         },
-                      })
-                    }
+                      });
+                    }}
                   />
                   {label}
                 </label>
@@ -61,6 +65,7 @@ export const PlaylistModal = () => {
                     type: "ADD_NEW_PLAYLIST",
                     payload: { title: playlistIp, video: modalData },
                   });
+                playlistIp && toast.success("Added to Playlist");
                 setPlaylistIp("");
               }}
             >

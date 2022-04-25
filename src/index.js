@@ -11,6 +11,7 @@ import {
   PlaylistProvider,
   LikesProvider,
   HistoryProvider,
+  AuthProvider,
 } from "contexts";
 import { ModalProvider } from "contexts/ModalContext";
 
@@ -20,21 +21,23 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <VideoProvider>
-        <WatchLaterProvider>
-          <LikesProvider>
-            <HistoryProvider>
-              <PlaylistProvider>
-                <SidebarProvider>
-                  <ModalProvider>
-                    <App />
-                  </ModalProvider>
-                </SidebarProvider>
-              </PlaylistProvider>
-            </HistoryProvider>
-          </LikesProvider>
-        </WatchLaterProvider>
-      </VideoProvider>
+      <AuthProvider>
+        <VideoProvider>
+          <WatchLaterProvider>
+            <LikesProvider>
+              <HistoryProvider>
+                <PlaylistProvider>
+                  <SidebarProvider>
+                    <ModalProvider>
+                      <App />
+                    </ModalProvider>
+                  </SidebarProvider>
+                </PlaylistProvider>
+              </HistoryProvider>
+            </LikesProvider>
+          </WatchLaterProvider>
+        </VideoProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

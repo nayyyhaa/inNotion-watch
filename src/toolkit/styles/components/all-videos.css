@@ -116,6 +116,10 @@
   }
 }
 
+.videos-content.full-wd {
+  width: 100%;
+}
+
 @media screen and (max-width: 950px) {
   .sidebar-items {
     margin-top: 9rem;
@@ -124,7 +128,7 @@
   .videos-content {
     width: 90%;
     margin-left: auto;
-    padding: 4rem 0;
+    padding-top: 4rem;
   }
 }
 

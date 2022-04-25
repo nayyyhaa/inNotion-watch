@@ -5,3 +5,5 @@ export { VideoCard } from "./VideoCard";
 export { Chip } from "./Chip";
 export { Footer } from "./Footer";
 export { PlaylistModal } from "./PlaylistModal";
+export { LoginForm } from "./LoginForm";
+export { SignupForm } from "./SignupForm";

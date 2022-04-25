@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { usePlaylist } from "contexts";
 import noVideo from "toolkit/assets/search.svg";
 import { BsFillPlayFill, BsTrashFill } from "react-icons/bs";
-import noVideoIcon  from "toolkit/assets/no-video.png";
+import noVideoIcon from "toolkit/assets/no-video.png";
+import { toast } from "react-toastify";
 
 export const PlaylistFeed = () => {
   const { playlist, dispatchPlaylist } = usePlaylist();
@@ -44,6 +45,7 @@ export const PlaylistFeed = () => {
                         title: list,
                       },
                     });
+                    toast.info("Playlist deleted!");
                   }}
                 >
                   <BsTrashFill />

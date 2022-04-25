@@ -1,6 +1,7 @@
 .login-content,
 .profile-content {
-  background: linear-gradient(to bottom, var(--COLOR-PRIMARY-XXLIGHT), var(--COLOR-PRIMARY-LIGHT));
+  background: linear-gradient(to top, var(--COLOR-PRIMARY-XXLIGHT), var(--COLOR-PRIMARY-LIGHT));
+  min-height: 100vh;
 }
 
 .login-actions {

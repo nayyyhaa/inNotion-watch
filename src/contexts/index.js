@@ -5,3 +5,4 @@ export { useWatchLater, WatchLaterProvider } from "./WatchLaterContext";
 export { usePlaylist, PlaylistProvider } from "./PlaylistContext";
 export { useLikes, LikesProvider } from "./LikesContext";
 export { useHistory, HistoryProvider } from "./HistoryContext";
+export { useAuth, AuthProvider } from "./AuthContext";

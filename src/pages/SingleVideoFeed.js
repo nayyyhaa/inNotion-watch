@@ -3,21 +3,13 @@ import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
   const { videos } = useVideo();
   const video = videos.find((el) => el._id === id);
-  const {
-    _id,
-    shortTitle,
-    description,
-    creator,
-    views,
-    creatorThumbnail,
-    publishDate,
-    subscribers,
-  } = video;
+  const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers } = video;
   const { setShowModal, setModalData } = useModal();
   const { watchList, dispatchWatchList } = useWatchLater();
   const { likes, dispatchLikes } = useLikes();
@@ -46,7 +38,14 @@ export const SingleVideoFeed = () => {
           {views} • {publishDate}
         </small>
         <div className="video-actions row-flex">
-          <p className="row-flex cursor" onClick={() => dispatchLikes({ type: "TOGGLE_LIKES", payload: video })}>
+          <p
+            className="row-flex cursor"
+            onClick={() => {
+              dispatchLikes({ type: "TOGGLE_LIKES", payload: video });
+              if (likesIndex > -1) toast.info("Removed from Liked videos");
+              else toast.success("Added to Liked videos");
+            }}
+          >
             <AiFillLike className={`${likesIndex > -1 ? "colored-text" : ""}`} />
             <span className="sidebar-title p-l-1">LIKE</span>
           </p>
@@ -62,7 +61,11 @@ export const SingleVideoFeed = () => {
           </p>
           <p
             className="row-flex cursor"
-            onClick={() => dispatchWatchList({ type: "TOGGLE_WATCHLIST", payload: video })}
+            onClick={() => {
+              dispatchWatchList({ type: "TOGGLE_WATCHLIST", payload: video });
+              if (watchLaterIndex > -1) toast.info("Removed from watchlist");
+              else toast.success("Added to watchlist");
+            }}
           >
             <MdWatchLater className={`${watchLaterIndex > -1 ? "colored-text" : ""}`} />
             <span className="sidebar-title p-l-1">WATCH LATER</span>
