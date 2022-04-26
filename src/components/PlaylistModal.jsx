@@ -28,7 +28,7 @@ export const PlaylistModal = () => {
                     className="checkbox-input m-r-1"
                     checked={playlist[label].includes(modalData)}
                     onChange={(e) => {
-                      if(playlist[label].includes(modalData)) toast.info("Removed from Playlist");
+                      if (playlist[label].includes(modalData)) toast.info("Removed from Playlist");
                       else toast.success("Added to Playlist");
                       dispatchPlaylist({
                         type: "SET_TO_PLAYLIST",

@@ -11,14 +11,14 @@ export const SingleVideoFeed = () => {
   const video = videos.find((el) => el._id === id);
   const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers } = video;
   const { setShowModal, setModalData } = useModal();
-  const { watchList, dispatchWatchList } = useWatchLater();
-  const { likes, dispatchLikes } = useLikes();
-  const { dispatchHistory } = useHistory();
+  const { watchList, deleteWatchLater, createWatchLater } = useWatchLater();
+  const { likes, deleteLikes, createLikes } = useLikes();
+  const { createHistory } = useHistory();
   const watchLaterIndex = watchList.findIndex((el) => el._id === video._id);
   const likesIndex = likes.findIndex((el) => el._id === video._id);
 
   useEffect(() => {
-    dispatchHistory({ type: "ADD_TO_HISTORY", payload: video });
+    createHistory(video);
   }, [video]);
 
   return (
@@ -41,9 +41,8 @@ export const SingleVideoFeed = () => {
           <p
             className="row-flex cursor"
             onClick={() => {
-              dispatchLikes({ type: "TOGGLE_LIKES", payload: video });
-              if (likesIndex > -1) toast.info("Removed from Liked videos");
-              else toast.success("Added to Liked videos");
+              if (likesIndex > -1) deleteLikes(video._id);
+              else createLikes(video);
             }}
           >
             <AiFillLike className={`${likesIndex > -1 ? "colored-text" : ""}`} />
@@ -62,9 +61,8 @@ export const SingleVideoFeed = () => {
           <p
             className="row-flex cursor"
             onClick={() => {
-              dispatchWatchList({ type: "TOGGLE_WATCHLIST", payload: video });
-              if (watchLaterIndex > -1) toast.info("Removed from watchlist");
-              else toast.success("Added to watchlist");
+              if (watchLaterIndex > -1) deleteWatchLater(video._id);
+              else createWatchLater(video);
             }}
           >
             <MdWatchLater className={`${watchLaterIndex > -1 ? "colored-text" : ""}`} />
