@@ -6,8 +6,8 @@ import { useEffect } from "react";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
-  const { videos } = useVideo();
-  const video = videos.find((el) => el._id === id);
+  const { videos, getVideo } = useVideo();
+  let video = videos.find((el) => el._id === id) ?? getVideo(id);
   const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers } = video;
   const { setShowModal, setModalData } = useModal();
   const { watchList, deleteWatchLater, createWatchLater } = useWatchLater();
@@ -17,7 +17,10 @@ export const SingleVideoFeed = () => {
   const likesIndex = likes.findIndex((el) => el._id === video._id);
 
   useEffect(() => {
-    createHistory(video);
+    (async() => {
+      video = await getVideo(id);
+      createHistory(video);
+    })()
   }, [video]);
 
   return (
