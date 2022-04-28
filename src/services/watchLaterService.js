@@ -25,7 +25,6 @@ export const createWatchLaterService = async (authToken, video) => {
       }
     );
     if (response.status === 201) {
-      console.log(response.data, "check");
       return response.data;
     } else {
       throw new Error();

@@ -6,7 +6,6 @@ export const PlaylistModal = () => {
   const { showModal, setShowModal, modalData } = useModal();
   const [playlistIp, setPlaylistIp] = useState("");
   const { playlist, createPlaylist, deletePlaylistData, createPlaylistData } = usePlaylist();
-  console.log(playlist, "p");
   return (
     <div className={`modal-wrapper modal-wrapper-example grid-ctr ${showModal ? "show-modal" : ""}`}>
       <div className="modal grid-ctr p-t-5">

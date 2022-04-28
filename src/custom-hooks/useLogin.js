@@ -75,10 +75,8 @@ export const useLogin = () => {
   useEffect(() => {
     (async () => {
       const token = localStorage.getItem("innotion-watch-token");
-      console.log(token, "t")
       if (token) {
         const likesRes = await getLikesService(token);
-        console.log(likesRes, "res");
         dispatchLikes({ type: "SET_LIKES", payload: likesRes.likes });
         const watchlaterRes = await getWatchLaterService(token);
         dispatchWatchList({ type: "SET_WATCHLATER", payload: watchlaterRes.watchlater });
