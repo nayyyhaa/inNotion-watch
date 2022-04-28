@@ -1,13 +1,12 @@
 import { useModal, usePlaylist } from "contexts";
 import { useState } from "react";
 import { MdClose, MdPlaylistAdd } from "react-icons/md";
-import { toast } from "react-toastify";
 
 export const PlaylistModal = () => {
   const { showModal, setShowModal, modalData } = useModal();
   const [playlistIp, setPlaylistIp] = useState("");
-  const { playlist, dispatchPlaylist } = usePlaylist();
-  const playListNames = Object.keys(playlist);
+  const { playlist, createPlaylist, deletePlaylistData, createPlaylistData } = usePlaylist();
+  console.log(playlist, "p");
   return (
     <div className={`modal-wrapper modal-wrapper-example grid-ctr ${showModal ? "show-modal" : ""}`}>
       <div className="modal grid-ctr p-t-5">
@@ -19,28 +18,21 @@ export const PlaylistModal = () => {
         </button>
         <ul className="no-bullet col-flex flex-start no-wrap p-h-2 m-b-3 p-t-2">
           <li className="filter-list p-l-2 m-v-1">PLAYLIST</li>
-          {playListNames?.map((label) => {
+          {playlist?.map((list) => {
             return (
-              <li key={label} className="filter-item p-l-2 m-v-05">
+              <li key={list?._id} className="filter-item p-l-2 m-v-05">
                 <label className="categories sub-heading">
                   <input
                     type="checkbox"
                     className="checkbox-input m-r-1"
-                    checked={playlist[label].includes(modalData)}
+                    checked={list?.videos?.some((el) => el._id === modalData._id)}
                     onChange={(e) => {
-                      if (playlist[label].includes(modalData)) toast.info("Removed from Playlist");
-                      else toast.success("Added to Playlist");
-                      dispatchPlaylist({
-                        type: "SET_TO_PLAYLIST",
-                        payload: {
-                          title: label,
-                          _id: modalData._id,
-                          video: modalData,
-                        },
-                      });
+                      if (list?.videos?.some((el) => el._id === modalData._id))
+                        deletePlaylistData(list?._id, modalData._id);
+                      else createPlaylistData(list?._id, modalData);
                     }}
                   />
-                  {label}
+                  {list.title}
                 </label>
               </li>
             );
@@ -60,12 +52,7 @@ export const PlaylistModal = () => {
             <button
               className="btn primary-btn"
               onClick={() => {
-                playlistIp &&
-                  dispatchPlaylist({
-                    type: "ADD_NEW_PLAYLIST",
-                    payload: { title: playlistIp, video: modalData },
-                  });
-                playlistIp && toast.success("Added to Playlist");
+                playlistIp && createPlaylist({ title: playlistIp });
                 setPlaylistIp("");
               }}
             >

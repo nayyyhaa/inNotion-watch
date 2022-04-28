@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { historyReducer } from "reducers/historyReducer";
@@ -8,8 +8,8 @@ import { useAuth } from "./AuthContext";
 const HistoryContext = createContext();
 
 const HistoryProvider = ({ children }) => {
-  const [history, dispatchHistory] = useReducer(historyReducer, []);
-  const { auth } = useAuth();
+  const [history, dispatchHistory] = useReducer(historyReducer, JSON.parse(localStorage.getItem("user"))?.history ?? []);
+  const { auth, user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const getHistory = async () => {
@@ -31,7 +31,6 @@ const HistoryProvider = ({ children }) => {
       } else navigate("/login");
     } catch (err) {
       console.error(err);
-      toast.error("Error in adding to history");
     }
   };
 
@@ -46,6 +45,13 @@ const HistoryProvider = ({ children }) => {
       toast.error("Error in removing from history");
     }
   };
+
+  useEffect(() => {
+    const newUserData = { ...user, history };
+    setUser(newUserData);
+    localStorage.setItem("user", JSON.stringify(newUserData));
+  }, [history]);
+
   return (
     <HistoryContext.Provider value={{ history, dispatchHistory, getHistory, createHistory, deleteHistory }}>
       {children}

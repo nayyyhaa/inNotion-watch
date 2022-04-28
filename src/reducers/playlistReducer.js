@@ -1,6 +1,9 @@
 export const playlistReducer = (state, action) => {
   switch (action.type) {
-    case "SET_PLAYLIST": return action.payload
+    case "SET_PLAYLIST":
+      return action.payload;
+    case "SET_PLAYLIST_DATA": 
+      return state.map((el) => (el._id === action.payload._id ? { ...el, ...action.payload } : el));
     case "ADD_NEW_PLAYLIST":
       return { ...state, [action.payload.title]: [action.payload.video] };
     case "SET_TO_PLAYLIST": {

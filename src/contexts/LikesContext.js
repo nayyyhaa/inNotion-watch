@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { likesReducer } from "reducers/likesReducer";
@@ -8,8 +8,8 @@ import { useAuth } from "./AuthContext";
 const LikesContext = createContext();
 
 const LikesProvider = ({ children }) => {
-  const [likes, dispatchLikes] = useReducer(likesReducer, []);
-  const { auth } = useAuth();
+  const [likes, dispatchLikes] = useReducer(likesReducer, JSON.parse(localStorage.getItem("user"))?.likes ?? []);
+  const { auth, user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const getLikes = async () => {
@@ -28,10 +28,10 @@ const LikesProvider = ({ children }) => {
       if (auth.isAuth) {
         const res = await createLikesService(auth.token, video);
         dispatchLikes({ type: "SET_LIKES", payload: res.likes });
-        toast.success("Added to liked videos!")
+        toast.success("Added to liked videos!");
       } else navigate("/login");
     } catch (err) {
-      toast.error("Error in adding to liked videos")
+      toast.error("Error in adding to liked videos");
     }
   };
 
@@ -46,6 +46,12 @@ const LikesProvider = ({ children }) => {
       toast.error("Error in removing from liked videos");
     }
   };
+
+  useEffect(() => {
+    const newUserData = { ...user, likes };
+    setUser(newUserData);
+    localStorage.setItem("user", JSON.stringify(newUserData));
+  }, [likes]);
 
   return (
     <LikesContext.Provider value={{ likes, dispatchLikes, getLikes, createLikes, deleteLikes }}>

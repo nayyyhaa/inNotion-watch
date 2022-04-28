@@ -60,7 +60,7 @@ export const getPlaylistDataService = async (authToken, id) => {
       throw new Error();
     }
   } catch (e) {
-    console.error("getCart : Error in fetching playlist details", e);
+    console.error("getPlaylistData : Error in fetching playlist details", e);
   }
 };
 
@@ -70,7 +70,7 @@ export const createPlaylistDataService = async (authToken, id, video) => {
       `/api/user/playlists/${id}`,
       { video },
       {
-        playlist: { authorization: authToken },
+        headers: { authorization: authToken },
       }
     );
     if (response.status === 201) {

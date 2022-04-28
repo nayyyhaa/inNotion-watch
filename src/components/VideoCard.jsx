@@ -2,14 +2,13 @@ import { useHistory, useLikes, useModal, usePlaylist, useWatchLater } from "cont
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
-export const VideoCard = ({ video, label, cardData }) => {
+export const VideoCard = ({ video, id, cardData }) => {
   const { _id, thumbnail, shortTitle, creator, views, creatorThumbnail } = video;
   const { setShowModal, setModalData } = useModal();
   const { watchList, createWatchLater, deleteWatchLater } = useWatchLater();
   const { deleteLikes } = useLikes();
-  const { dispatchPlaylist } = usePlaylist();
+  const { deletePlaylistData } = usePlaylist();
   const { deleteHistory } = useHistory();
   const index = watchList.findIndex((el) => el._id === video._id);
 
@@ -20,17 +19,8 @@ export const VideoCard = ({ video, label, cardData }) => {
         return deleteHistory(video._id);
       case "liked":
         return deleteLikes(video._id);
-      case "playlist": {
-        toast.info("Removed from Playlist");
-        return dispatchPlaylist({
-          type: "SET_TO_PLAYLIST",
-          payload: {
-            title: label,
-            _id: video._id,
-            video: video,
-          },
-        });
-      }
+      case "playlist":
+        return deletePlaylistData(id, video._id);
       default:
         return null;
     }

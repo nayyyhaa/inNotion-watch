@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { watchLaterReducer } from "reducers/watchLaterReducer";
@@ -8,8 +8,11 @@ import { useAuth } from "./AuthContext";
 const WatchLaterContext = createContext();
 
 const WatchLaterProvider = ({ children }) => {
-  const [watchList, dispatchWatchList] = useReducer(watchLaterReducer, []);
-  const { auth } = useAuth();
+  const [watchList, dispatchWatchList] = useReducer(
+    watchLaterReducer,
+    JSON.parse(localStorage.getItem("user"))?.watchlater ?? []
+  );
+  const { auth, user, setUser } = useAuth();
   const navigate = useNavigate();
 
   const getWatchLater = async () => {
@@ -47,6 +50,13 @@ const WatchLaterProvider = ({ children }) => {
       toast.error("Error in removing from watch later");
     }
   };
+
+  useEffect(() => {
+    const newUserData = { ...user, watchlater: watchList };
+    setUser(newUserData);
+    localStorage.setItem("user", JSON.stringify(newUserData));
+  }, [watchList]);
+
   return (
     <WatchLaterContext.Provider
       value={{ watchList, dispatchWatchList, getWatchLater, createWatchLater, deleteWatchLater }}

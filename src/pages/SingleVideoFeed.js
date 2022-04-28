@@ -1,9 +1,8 @@
 import { useModal, useWatchLater, useVideo, useLikes, useHistory } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
-import { AiOutlineLike, AiFillLike } from "react-icons/ai";
+import { AiFillLike } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
