@@ -1,29 +1,25 @@
 import { Server, Model, RestSerializer } from "miragejs";
-import {
-  loginHandler,
-  signupHandler,
-} from "./backend/controllers/AuthController";
+import { loginHandler, signupHandler } from "./backend/controllers/AuthController";
 import {
   getHistoryVideosHandler,
   addVideoToHistoryHandler,
   removeVideoFromHistoryHandler,
   clearHistoryHandler,
 } from "./backend/controllers/HistoryController";
-import {
-  getAllVideosHandler,
-  getVideoHandler,
-} from "./backend/controllers/VideoController";
+import { getAllVideosHandler, getVideoHandler } from "./backend/controllers/VideoController";
 import { videos } from "./backend/db/videos";
 import { categories } from "./backend/db/categories";
-import {
-  getAllCategoriesHandler,
-  getCategoryHandler,
-} from "./backend/controllers/CategoryController";
+import { getAllCategoriesHandler, getCategoryHandler } from "./backend/controllers/CategoryController";
 import {
   getLikedVideosHandler,
   addItemToLikedVideos,
   removeItemFromLikedVideos,
 } from "./backend/controllers/LikeController";
+import {
+  getWatchLaterVideosHandler,
+  addItemToWatchLaterVideos,
+  removeItemFromWatchLaterVideos,
+} from "./backend/controllers/WatchLaterController";
 import {
   getAllPlaylistsHandler,
   addNewPlaylistHandler,
@@ -47,6 +43,7 @@ export function makeServer({ environment = "development" } = {}) {
       like: Model,
       history: Model,
       playlist: Model,
+      watchlater: Model,
     },
 
     // Runs on the start of the server
@@ -62,6 +59,7 @@ export function makeServer({ environment = "development" } = {}) {
           likes: [],
           history: [],
           playlists: [],
+          watchlater: [],
         })
       );
     },
@@ -87,34 +85,24 @@ export function makeServer({ environment = "development" } = {}) {
       this.post("/user/likes", addItemToLikedVideos.bind(this));
       this.delete("/user/likes/:videoId", removeItemFromLikedVideos.bind(this));
 
+      // watchlater routes (private)
+      this.get("/user/watchlater", getWatchLaterVideosHandler.bind(this));
+      this.post("/user/watchlater", addItemToWatchLaterVideos.bind(this));
+      this.delete("/user/watchlater/:videoId", removeItemFromWatchLaterVideos.bind(this));
+
       // playlist routes (private)
       this.get("/user/playlists", getAllPlaylistsHandler.bind(this));
       this.post("/user/playlists", addNewPlaylistHandler.bind(this));
-      this.delete(
-        "/user/playlists/:playlistId",
-        removePlaylistHandler.bind(this)
-      );
+      this.delete("/user/playlists/:playlistId", removePlaylistHandler.bind(this));
 
-      this.get(
-        "/user/playlists/:playlistId",
-        getVideosFromPlaylistHandler.bind(this)
-      );
-      this.post(
-        "/user/playlists/:playlistId",
-        addVideoToPlaylistHandler.bind(this)
-      );
-      this.delete(
-        "/user/playlists/:playlistId/:videoId",
-        removeVideoFromPlaylistHandler.bind(this)
-      );
+      this.get("/user/playlists/:playlistId", getVideosFromPlaylistHandler.bind(this));
+      this.post("/user/playlists/:playlistId", addVideoToPlaylistHandler.bind(this));
+      this.delete("/user/playlists/:playlistId/:videoId", removeVideoFromPlaylistHandler.bind(this));
 
       // history routes (private)
       this.get("/user/history", getHistoryVideosHandler.bind(this));
       this.post("/user/history", addVideoToHistoryHandler.bind(this));
-      this.delete(
-        "/user/history/:videoId",
-        removeVideoFromHistoryHandler.bind(this)
-      );
+      this.delete("/user/history/:videoId", removeVideoFromHistoryHandler.bind(this));
       this.delete("/user/history/all", clearHistoryHandler.bind(this));
     },
   });

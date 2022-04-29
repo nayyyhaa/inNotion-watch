@@ -8,3 +8,4 @@ export { TrendingFeed } from "./TrendingFeed";
 export { SingleVideoFeed } from "./SingleVideoFeed";
 export { LikedFeed } from "./LikedFeed";
 export { HistoryFeed } from "./HistoryFeed";
+export { PageNotFound } from "./PageNotFound";

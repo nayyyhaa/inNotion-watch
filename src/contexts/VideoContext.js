@@ -1,5 +1,7 @@
 import { createContext, useReducer, useContext } from "react";
 import videoData from "toolkit/data/videoData";
+import axios from "axios";
+import { getVideoService } from "services";
 
 const VideoContext = createContext();
 
@@ -14,7 +16,17 @@ const videoReducer = (state, action) => {
 
 const VideoProvider = ({ children }) => {
   const [videos, dispatchVideos] = useReducer(videoReducer, []);
-  return <VideoContext.Provider value={{ videos, dispatchVideos }}>{children}</VideoContext.Provider>;
+
+  const getVideo = async (id) => {
+    try {
+      const response = await getVideoService(id);
+      return response
+    } catch (e) {
+      console.error("getVideo : Error in fetching video", e);
+    }
+  };
+
+  return <VideoContext.Provider value={{ videos, dispatchVideos, getVideo }}>{children}</VideoContext.Provider>;
 };
 
 const useVideo = () => useContext(VideoContext);

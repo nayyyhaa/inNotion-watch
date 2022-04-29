@@ -11,6 +11,7 @@ import {
   HistoryFeed,
   Authorisation,
   ProfilePage,
+  PageNotFound,
 } from "pages";
 import { Footer, Navbar, PlaylistModal, Sidebar } from "components";
 import { useModal, useVideo } from "contexts";
@@ -51,6 +52,7 @@ function App() {
               <Route path="/playlist-feed/:id" element={<PlaylistVideos />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>
+            <Route path="*" element={<PageNotFound />} />
             <Route path="/mockman" element={<Mockman />} />
           </Routes>
         </main>

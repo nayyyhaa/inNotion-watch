@@ -2,41 +2,25 @@ import { useHistory, useLikes, useModal, usePlaylist, useWatchLater } from "cont
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { MdClose } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
-export const VideoCard = ({ video, label, cardData }) => {
+export const VideoCard = ({ video, id, cardData }) => {
   const { _id, thumbnail, shortTitle, creator, views, creatorThumbnail } = video;
   const { setShowModal, setModalData } = useModal();
-  const { watchList, dispatchWatchList } = useWatchLater();
-  const { likes, dispatchLikes } = useLikes();
-  const { dispatchPlaylist } = usePlaylist();
-  const { dispatchHistory } = useHistory();
+  const { watchList, createWatchLater, deleteWatchLater } = useWatchLater();
+  const { deleteLikes } = useLikes();
+  const { deletePlaylistData } = usePlaylist();
+  const { deleteHistory } = useHistory();
   const index = watchList.findIndex((el) => el._id === video._id);
-  const likesIndex = likes.findIndex((el) => el._id === video._id);
 
   const deleteHandler = (e) => {
     e.preventDefault();
     switch (cardData) {
-      case "history": {
-        toast.info("Removed from History");
-        return dispatchHistory({ type: "REMOVE_FROM_HISTORY", payload: video });
-      }
-      case "liked": {
-        if (likesIndex > -1) toast.info("Removed from Liked videos");
-        else toast.success("Added to Liked videos");
-        return dispatchLikes({ type: "TOGGLE_LIKES", payload: video });
-      }
-      case "playlist": {
-        toast.info("Removed from Playlist");
-        return dispatchPlaylist({
-          type: "SET_TO_PLAYLIST",
-          payload: {
-            title: label,
-            _id: video._id,
-            video: video,
-          },
-        });
-      }
+      case "history":
+        return deleteHistory(video._id);
+      case "liked":
+        return deleteLikes(video._id);
+      case "playlist":
+        return deletePlaylistData(id, video._id);
       default:
         return null;
     }
@@ -84,9 +68,8 @@ export const VideoCard = ({ video, label, cardData }) => {
             <button
               className="p-l-1 card-icon-btn icon-btn rd-bdr"
               onClick={() => {
-                dispatchWatchList({ type: "TOGGLE_WATCHLIST", payload: video });
-                if (index > -1) toast.info("Removed from watchlist");
-                else toast.success("Added to watchlist");
+                if (index > -1) deleteWatchLater(video._id);
+                else createWatchLater(video);
               }}
             >
               <MdWatchLater className={`${index > -1 ? "colored-text" : ""}`} />
