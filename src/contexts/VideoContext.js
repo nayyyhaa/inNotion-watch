@@ -1,6 +1,7 @@
 import { createContext, useReducer, useContext } from "react";
 import videoData from "toolkit/data/videoData";
 import axios from "axios";
+import { getVideoService } from "services";
 
 const VideoContext = createContext();
 
@@ -18,12 +19,8 @@ const VideoProvider = ({ children }) => {
 
   const getVideo = async (id) => {
     try {
-      const response = await axios.get(`/api/video/${id}`);
-      if (response.status === 200) {
-        return response.data.video;
-      } else {
-        throw new Error();
-      }
+      const response = await getVideoService(id);
+      return response
     } catch (e) {
       console.error("getVideo : Error in fetching video", e);
     }
