@@ -11,8 +11,19 @@ import { Response } from "miragejs";
  * */
 
 export const getAllVideosHandler = function () {
+  const videosList = this.db.videos;
+  const videos = videosList.map((video) => ({
+    ...video,
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
+  }));
   try {
-    return new Response(200, {}, { videos: this.db.videos });
+    return new Response(200, {}, { videos });
   } catch (error) {
     return new Response(
       500,

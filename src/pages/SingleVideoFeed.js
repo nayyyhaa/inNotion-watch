@@ -2,13 +2,14 @@ import { useModal, useWatchLater, useVideo, useLikes, useHistory } from "context
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { AiFillLike } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { CommentBox } from "components";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
   const { videos, getVideo } = useVideo();
   let video = videos.find((el) => el._id === id) ?? getVideo(id);
-  const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers } = video;
+  const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers, comments } = video;
   const { setShowModal, setModalData } = useModal();
   const { watchList, deleteWatchLater, createWatchLater } = useWatchLater();
   const { likes, deleteLikes, createLikes } = useLikes();
@@ -17,10 +18,10 @@ export const SingleVideoFeed = () => {
   const likesIndex = likes.findIndex((el) => el._id === video._id);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       video = await getVideo(id);
       createHistory(video);
-    })()
+    })();
   }, [video]);
 
   return (
@@ -83,6 +84,8 @@ export const SingleVideoFeed = () => {
         </div>
       </div>
       <p className="p-l-1">{description}</p>
+      <div className="line-decoration"></div>
+      <CommentBox comments={comments} id={id} />
     </div>
   );
 };

@@ -9,6 +9,10 @@ const videoReducer = (state, action) => {
   switch (action.type) {
     case "GET_ALL_VIDEOS":
       return action.payload;
+    case "SET_COMMENT":
+      return state.map((vid) =>
+        vid._id === action.payload.id ? { ...vid, comments: [...vid.comments, action.payload.comments] } : vid
+      );
     default:
       return state;
   }
@@ -20,7 +24,7 @@ const VideoProvider = ({ children }) => {
   const getVideo = async (id) => {
     try {
       const response = await getVideoService(id);
-      return response
+      return response;
     } catch (e) {
       console.error("getVideo : Error in fetching video", e);
     }
