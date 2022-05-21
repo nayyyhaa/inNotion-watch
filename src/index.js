@@ -12,6 +12,7 @@ import {
   LikesProvider,
   HistoryProvider,
   AuthProvider,
+  SearchProvider,
 } from "contexts";
 import { ModalProvider } from "contexts/ModalContext";
 
@@ -27,11 +28,13 @@ ReactDOM.render(
             <LikesProvider>
               <HistoryProvider>
                 <PlaylistProvider>
-                  <SidebarProvider>
-                    <ModalProvider>
-                      <App />
-                    </ModalProvider>
-                  </SidebarProvider>
+                  <SearchProvider>
+                    <SidebarProvider>
+                      <ModalProvider>
+                        <App />
+                      </ModalProvider>
+                    </SidebarProvider>
+                  </SearchProvider>
                 </PlaylistProvider>
               </HistoryProvider>
             </LikesProvider>

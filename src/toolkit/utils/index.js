@@ -1,2 +1,2 @@
 export { getCategories } from "./getCategories";
-export { getFilteredVideos } from "./getFilteredVideos";
+export { getFilteredVideos, getSearchedVideos } from "./getFilteredVideos";
