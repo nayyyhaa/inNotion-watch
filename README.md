@@ -25,8 +25,8 @@
 ## Features:
 Responsive screens with:
 - **Landing Page** with all videos listed. Multiple categories available for user to filter selected category.
-- Feature in Landing page: options of Watch Later, create new Playlist, add or remove the video from Playlist, filter by categories.
-- **Single Video Page** - User can like video, add/remove video from watch Later, Add/Remove from Playlist.
+- Feature in Landing page: options of Watch Later, create new Playlist, add or remove the video from Playlist, filter by categories. Added search functionality.
+- **Single Video Page** - User can like video, add/remove video from watch Later, Add/Remove from Playlist. User can add/edit/delete notes. User can add comments as well.
 - **Playlist Management Page**, consists of all custom Playlists, user can browse in playlist, delete video from playlist and delete playlist.
 - **Watch Later Page** - List of watch later videos. User can remove the video from Watch Later.
 - **History Page** - List of videos in history. User can remove the video from History.
