@@ -31,7 +31,7 @@ export const CommentBox = ({ comments, id }) => {
         </button>
       </div>
       {comments?.map(({ firstName, comment }) => (
-        <div className="video-info row-flex no-wrap p-l-1 m-v-2">
+        <div key={comment} className="video-info row-flex no-wrap p-l-1 m-v-2">
           <img className="avatar creater-thumbnail" src={userPic} alt="user" />
           <div className="video-description m-h-1 m-b-1">
             <h5>{firstName}</h5>

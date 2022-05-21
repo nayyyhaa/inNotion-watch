@@ -13,6 +13,32 @@ const videoReducer = (state, action) => {
       return state.map((vid) =>
         vid._id === action.payload.id ? { ...vid, comments: [...vid.comments, action.payload.comments] } : vid
       );
+    case "SET_NOTES":
+      return state.map((vid) =>
+        vid._id === action.payload.id
+          ? { ...vid, notes: vid.notes ? [...vid.notes, action.payload.notes] : [action.payload.notes] }
+          : vid
+      );
+    case "EDIT_NOTE":
+      return state.map((vid) =>
+        vid._id === action.payload.id
+          ? {
+              ...vid,
+              notes: vid.notes.map((noteEl) =>
+                noteEl.noteId === action.payload.noteId ? { ...noteEl, note: action.payload.notes } : noteEl
+              ),
+            }
+          : vid
+      );
+    case "DELETE_NOTE":
+      return state.map((vid) =>
+        vid._id === action.payload.id
+          ? {
+              ...vid,
+              notes: vid.notes.filter((noteEl) => noteEl.noteId !== action.payload.noteId),
+            }
+          : vid
+      );
     default:
       return state;
   }

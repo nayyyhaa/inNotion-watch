@@ -1,3 +1,10 @@
+.notes-container {
+  max-height: 70vh;
+  overflow-y: scroll;
+  background: var(--COLOR-OFFWHITE);
+  border-radius: 1rem;
+}
+
 .note-input {
   border: none;
   border-bottom: 1px solid var(--BLACK);
@@ -8,6 +15,12 @@
   height: fit-content;
 }
 
+.note-field {
+  display: flex;
+  align-items: center;
+}
+
+.note,
 .note-input {
   word-wrap: wrap;
   white-space: pre-wrap;
@@ -18,13 +31,26 @@
   outline: none;
 }
 
+.note-header,
+.side-bar-title,
+.note-footer,
+.note-footer .note-actions {
+  justify-content: space-between;
+}
+
+.note {
+  border-radius: 1rem;
+  margin: 2rem auto;
+  min-height: 12rem;
+}
+
 @media screen and (max-width: 450px) {
   .note-input {
     width: 70%;
     margin: 0 0.5rem;
   }
 
-  .note-field .btn{
+  .note-field .btn {
     margin: 0 0 0 0.5rem;
   }
 }
