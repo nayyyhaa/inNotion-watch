@@ -1,9 +1,10 @@
 import { BsPenFill, BsTrashFill } from "react-icons/bs";
 import { useState } from "react";
 import { useVideo } from "contexts";
+import { formatDate } from "toolkit/utils";
 
 export const Note = ({ id, noteEl }) => {
-  const { note, noteId } = noteEl;
+  const { note, noteId, date } = noteEl;
   const [noteIp, setNoteIp] = useState(note);
   const [editModeOn, setEditModeOn] = useState(false);
   const { dispatchVideos } = useVideo();
@@ -33,7 +34,7 @@ export const Note = ({ id, noteEl }) => {
         <p className="m-v-1 m-b-3">{note}</p>
       )}
       <div className="note-footer row-flex">
-        <small className="inherit-color">3:32 PM 20 May</small>
+        <small className="inherit-color">{formatDate(date)}</small>
         <div className="note-actions w-5rm row-flex">
           <BsPenFill className="m-r-1" onClick={editModeHandler} />
           <BsTrashFill onClick={deleteNoteHandler} />

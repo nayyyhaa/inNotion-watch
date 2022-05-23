@@ -11,7 +11,7 @@ export const NotesSidebar = ({ notes, id }) => {
   const commentHandler = () => {
     dispatchVideos({
       type: "SET_NOTES",
-      payload: { id, notes: { noteId: uuid(), email: user?.email, note: noteIp } },
+      payload: { id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: new Date() } },
     });
     setNoteIp("");
   };
