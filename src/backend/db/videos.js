@@ -16,6 +16,13 @@ export const videos = [
     views: "33,894 views",
     publishDate: "Jan 18, 2018",
     subscribers: "1.4M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: true,
   },
   {
@@ -31,6 +38,13 @@ export const videos = [
     views: "109,078 views",
     publishDate: "May 25, 2021",
     subscribers: "9.03M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
   {
@@ -46,6 +60,13 @@ export const videos = [
     views: "2,442,687 views",
     publishDate: "April 20, 2020",
     subscribers: "1.4M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: true,
   },
   {
@@ -61,6 +82,13 @@ export const videos = [
     views: "4,008,447 views",
     publishDate: "Aug 8, 2021",
     subscribers: "2.38M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
   {
@@ -75,6 +103,13 @@ export const videos = [
     category: "Productivity",
     views: "926,291 views",
     publishDate: "Oct 23, 2021",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     subscribers: "546K subscribers",
     trending: true,
   },
@@ -90,6 +125,13 @@ export const videos = [
     views: "710,353 views",
     publishDate: "Jan 16, 2021",
     subscribers: "2.38M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
 
@@ -106,6 +148,13 @@ export const videos = [
     views: "713,987 views",
     publishDate: "Jan 7, 2021",
     subscribers: "1.4M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
   {
@@ -121,6 +170,13 @@ export const videos = [
     views: "20,981,136 views",
     publishDate: "Sept 10, 2017",
     subscribers: "11M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
   {
@@ -136,6 +192,13 @@ export const videos = [
     views: "171,460 views",
     publishDate: "May 11, 2021",
     subscribers: "9.03M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
   {
@@ -151,6 +214,13 @@ export const videos = [
     views: "1,277,942 views",
     publishDate: "Feb 27, 2020",
     subscribers: "1.4M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: true,
   },
   {
@@ -166,6 +236,13 @@ export const videos = [
     views: "389,383 views",
     publishDate: "April 16, 2021",
     subscribers: "9.03M subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: false,
   },
   {
@@ -181,6 +258,13 @@ export const videos = [
     views: "414,976 views",
     publishDate: "Jan 23, 2022",
     subscribers: "546K subscribers",
+    comments: [
+      {
+        firstName: "Neha",
+        lastName: "Gupta",
+        comment: "What an amazing video!",
+      },
+    ],
     trending: true,
   },
 ];

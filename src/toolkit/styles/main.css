@@ -8,6 +8,7 @@
 @import url("./components/playlist.css");
 @import url("./components/video.css");
 @import url("./components/footer.css");
+@import url("./components/comment.css");
 
 .no-video {
   opacity: 0.5;

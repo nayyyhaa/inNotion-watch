@@ -1,4 +1,4 @@
-import { useAuth } from "contexts";
+import { useAuth, useSearch } from "contexts";
 import { useSidebar } from "contexts/SidebarContext";
 import { Link, useLocation } from "react-router-dom";
 
@@ -7,6 +7,8 @@ export const Navbar = () => {
   const location = useLocation();
   const { auth } = useAuth();
   const isSidebarVisible = !(location.pathname.includes("login") || location.pathname.includes("signup"));
+  const { searchIp, setSearchIp } = useSearch();
+
   return (
     <header className="header fixed-header">
       <nav className="navbar row-flex w-95p m-auto p-05">
@@ -27,7 +29,17 @@ export const Navbar = () => {
           <span className="search-icon cursor p-h-1">
             <i className="fa fa-search" aria-hidden="true"></i>
           </span>
-          <input type="search" className="input search-nav reset-ip p-05" placeholder="Search here" id="search-text" />
+          <input
+            type="search"
+            className="input search-nav reset-ip p-05"
+            placeholder="Search here"
+            id="search-text"
+            value={searchIp}
+            onChange={(e) => setSearchIp(e.target.value)}
+          />
+          <Link to="/">
+            <button className="btn secondary-outline-btn m-l-1">Search</button>
+          </Link>
         </label>
         <div className="nav-icon-btns row-flex no-wrap">
           <ul className="row-flex no-bullet m-r-3">

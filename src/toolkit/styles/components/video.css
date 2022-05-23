@@ -115,4 +115,13 @@ svg {
   .single-video-page {
     width: 85%;
   }
+
+  .single-video-container {
+    flex-wrap: wrap;
+  }
+
+  .notes-container {
+    width: 90%;
+    margin: 2rem auto;
+  }
 }

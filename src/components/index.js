@@ -7,3 +7,5 @@ export { Footer } from "./Footer";
 export { PlaylistModal } from "./PlaylistModal";
 export { LoginForm } from "./LoginForm";
 export { SignupForm } from "./SignupForm";
+export { CommentBox } from "./CommentBox";
+export { NotesSidebar } from "./NotesSidebar";
