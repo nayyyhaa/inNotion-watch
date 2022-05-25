@@ -34,7 +34,8 @@ Responsive screens with:
 
 ## Technologies & Concepts used
 
-- React JS with useReducer + useContext
+- React JS
+- React-toolkit
 - React-router-dom
 - -React-toastify
 - JSX

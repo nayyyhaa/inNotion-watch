@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
-import { VideoProvider } from "contexts";
 import { store } from "redux/store";
 
 import { Provider } from "react-redux";
@@ -16,9 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <VideoProvider>
-          <App />
-        </VideoProvider>
+        <App />
       </Provider>
     </Router>
   </React.StrictMode>,

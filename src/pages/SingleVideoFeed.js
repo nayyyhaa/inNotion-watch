@@ -1,4 +1,3 @@
-import { useVideo } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { AiFillLike } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,10 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { createWatchLater, deleteWatchLater } from "redux/reducers/watchLaterSlice";
 import { createLikes, deleteLikes } from "redux/reducers/likesSlice";
 import { createHistory } from "redux/reducers/historySlice";
+import { getVideo } from "redux/reducers/videoSlice";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
-  const { videos, getVideo } = useVideo();
+  const { videos } = useSelector(store => store.videoReducer);
   let video = videos.find((el) => el._id === id) ?? getVideo(id);
   const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers, comments } = video;
   const { watchList } = useSelector((store) => store.watchLaterReducer);

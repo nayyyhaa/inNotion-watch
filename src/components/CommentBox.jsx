@@ -1,22 +1,22 @@
-import { useVideo } from "contexts";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setComment } from "redux/reducers/videoSlice";
 import userPic from "toolkit/assets/self-love.png";
 
 export const CommentBox = ({ comments, id }) => {
   const [commentIp, setCommentIp] = useState("");
   const { user } = useSelector((store) => store.userReducer);
   const { auth } = useSelector((store) => store.authReducer);
-  const { dispatchVideos } = useVideo();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const commentHandler = () => {
     if (auth.isAuth)
-      dispatchVideos({
-        type: "SET_COMMENT",
-        payload: { id, comments: { firstName: user?.firstName, lastName: user?.lastName, comment: commentIp } },
-      });
+      dispatch(
+        setComment({ id, comments: { firstName: user?.firstName, lastName: user?.lastName, comment: commentIp } })
+      );
+
     setCommentIp("");
   };
 

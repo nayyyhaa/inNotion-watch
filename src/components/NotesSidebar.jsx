@@ -1,7 +1,8 @@
-import { useVideo } from "contexts";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setNotes } from "redux/reducers/videoSlice";
+import { formatDate } from "toolkit/utils";
 import { v4 as uuid } from "uuid";
 import { Note } from "./Note";
 
@@ -9,15 +10,12 @@ export const NotesSidebar = ({ notes, id }) => {
   const [noteIp, setNoteIp] = useState("");
   const { auth } = useSelector((store) => store.authReducer);
   const { user } = useSelector((store) => store.userReducer);
-  const { dispatchVideos } = useVideo();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const commentHandler = () => {
     if (auth.isAuth)
-      dispatchVideos({
-        type: "SET_NOTES",
-        payload: { id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: new Date() } },
-      });
+      dispatch(setNotes({ id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: formatDate(new Date()) } }));
     setNoteIp("");
   };
 

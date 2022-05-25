@@ -8,6 +8,7 @@ import watchLaterReducer from "./reducers/watchLaterSlice";
 import likesReducer from "./reducers/likesSlice";
 import historyReducer from "./reducers/historySlice";
 import playlistReducer from "./reducers/playlistSlice";
+import videoReducer from "./reducers/videoSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     likesReducer,
     historyReducer,
     playlistReducer,
+    videoReducer,
   },
 });
