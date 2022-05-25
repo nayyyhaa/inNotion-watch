@@ -4,17 +4,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
-import {
-  SidebarProvider,
-  VideoProvider,
-  WatchLaterProvider,
-  PlaylistProvider,
-  LikesProvider,
-  HistoryProvider,
-  AuthProvider,
-  SearchProvider,
-} from "contexts";
-import { ModalProvider } from "contexts/ModalContext";
+import { VideoProvider } from "contexts";
+import { store } from "redux/store";
+
+import { Provider } from "react-redux";
 
 // Call make Server
 makeServer();
@@ -22,25 +15,11 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <AuthProvider>
+      <Provider store={store}>
         <VideoProvider>
-          <WatchLaterProvider>
-            <LikesProvider>
-              <HistoryProvider>
-                <PlaylistProvider>
-                  <SearchProvider>
-                    <SidebarProvider>
-                      <ModalProvider>
-                        <App />
-                      </ModalProvider>
-                    </SidebarProvider>
-                  </SearchProvider>
-                </PlaylistProvider>
-              </HistoryProvider>
-            </LikesProvider>
-          </WatchLaterProvider>
+          <App />
         </VideoProvider>
-      </AuthProvider>
+      </Provider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

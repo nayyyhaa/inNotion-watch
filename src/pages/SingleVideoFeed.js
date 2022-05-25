@@ -1,27 +1,33 @@
-import { useModal, useWatchLater, useVideo, useLikes, useHistory } from "contexts";
+import { useVideo } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { AiFillLike } from "react-icons/ai";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { CommentBox, NotesSidebar } from "components";
+import { setModalData, setShowModal } from "redux/reducers/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { createWatchLater, deleteWatchLater } from "redux/reducers/watchLaterSlice";
+import { createLikes, deleteLikes } from "redux/reducers/likesSlice";
+import { createHistory } from "redux/reducers/historySlice";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
   const { videos, getVideo } = useVideo();
   let video = videos.find((el) => el._id === id) ?? getVideo(id);
   const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers, comments } = video;
-  const { setShowModal, setModalData } = useModal();
-  const { watchList, deleteWatchLater, createWatchLater } = useWatchLater();
-  const { likes, deleteLikes, createLikes } = useLikes();
-  const { createHistory } = useHistory();
-  const watchLaterIndex = watchList.findIndex((el) => el._id === video._id);
-  const likesIndex = likes.findIndex((el) => el._id === video._id);
-  const notes = video?.notes ?? []
+  const { watchList } = useSelector((store) => store.watchLaterReducer);
+  const { likes } = useSelector((store) => store.likesReducer);
+  const { auth } = useSelector((store) => store.authReducer);
+  const watchLaterIndex = watchList?.findIndex((el) => el._id === video._id);
+  const likesIndex = likes?.findIndex((el) => el._id === video._id);
+  const notes = video?.notes ?? [];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       video = await getVideo(id);
-      createHistory(video);
+      dispatch(createHistory(video));
     })();
   }, [video]);
 
@@ -46,8 +52,9 @@ export const SingleVideoFeed = () => {
             <p
               className="row-flex cursor"
               onClick={() => {
-                if (likesIndex > -1) deleteLikes(video._id);
-                else createLikes(video);
+                if (!auth.isAuth) navigate("/login");
+                if (likesIndex > -1) dispatch(deleteLikes(video._id));
+                else dispatch(createLikes(video));
               }}
             >
               <AiFillLike className={`${likesIndex > -1 ? "colored-text" : ""}`} />
@@ -56,8 +63,11 @@ export const SingleVideoFeed = () => {
             <p
               className="row-flex cursor"
               onClick={() => {
-                setShowModal(true);
-                setModalData(video);
+                if (!auth.isAuth) navigate("/login");
+                else {
+                  dispatch(setShowModal(true));
+                  dispatch(setModalData(video));
+                }
               }}
             >
               <MdPlaylistPlay />
@@ -66,8 +76,9 @@ export const SingleVideoFeed = () => {
             <p
               className="row-flex cursor"
               onClick={() => {
-                if (watchLaterIndex > -1) deleteWatchLater(video._id);
-                else createWatchLater(video);
+                if (!auth.isAuth) navigate("/login");
+                if (watchLaterIndex > -1) dispatch(deleteWatchLater(video._id));
+                else dispatch(createWatchLater(video));
               }}
             >
               <MdWatchLater className={`${watchLaterIndex > -1 ? "colored-text" : ""}`} />

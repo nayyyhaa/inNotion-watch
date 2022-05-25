@@ -14,13 +14,18 @@ import {
   PageNotFound,
 } from "pages";
 import { Footer, Navbar, PlaylistModal, Sidebar } from "components";
-import { useModal, useVideo } from "contexts";
+import { useVideo } from "contexts";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useAsync } from "custom-hooks";
+import { useAsync, useValueChange } from "custom-hooks";
 import { PrivateRoute } from "routes/PrivateRoute";
 import Mockman from "mockman-js";
+import { useSelector } from "react-redux";
 function App() {
-  const { showModal } = useModal();
+  const { showModal } = useSelector((store) => store.modalReducer);
+  const { watchList } = useSelector((store) => store.watchLaterReducer);
+  const { likes } = useSelector((store) => store.likesReducer);
+  const { history } = useSelector((store) => store.historyReducer);
+  const { playlist } = useSelector((store) => store.playlistReducer);
   const { dispatchVideos } = useVideo();
   const location = useLocation();
   const isSidebarVisible = !(location.pathname.includes("login") || location.pathname.includes("signup"));
@@ -30,6 +35,10 @@ function App() {
     dispatch: dispatchVideos,
     payloadType: "videos",
   });
+  useValueChange({ name: "watchlater", value: watchList });
+  useValueChange({ name: "likes", value: likes });
+  useValueChange({ name: "history", value: history });
+  useValueChange({ name: "playlists", value: playlist });
 
   return (
     <div className="App">

@@ -3,12 +3,14 @@ import { useSearch, useVideo } from "contexts";
 import { Chip, Video } from "components";
 import { useState } from "react";
 import noVideo from "toolkit/assets/search.svg";
+import { useSelector } from "react-redux";
 
 export const Homepage = () => {
   const { videos } = useVideo();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const categories = getCategories(videos);
-  const { searchIp } = useSearch();
+  // const { searchIp } = useSearch();
+  const { searchIp } = useSelector((store) => store.searchReducer);
   const searchedVideos = getSearchedVideos(videos, searchIp);
   const filteredVideos = getFilteredVideos(searchedVideos, selectedCategory);
 

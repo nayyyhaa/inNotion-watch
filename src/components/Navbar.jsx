@@ -1,13 +1,16 @@
-import { useAuth, useSearch } from "contexts";
-import { useSidebar } from "contexts/SidebarContext";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { setSearchIp } from "redux/reducers/searchSlice";
+import { setShowFilterBar } from "redux/reducers/sidebarSlice";
 
 export const Navbar = () => {
-  const { setShowFilterBar } = useSidebar();
   const location = useLocation();
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
+  const { auth } = useSelector((store) => store.authReducer);
+  const { searchIp } = useSelector((store) => store.searchReducer);
+  const dispatch = useDispatch();
   const isSidebarVisible = !(location.pathname.includes("login") || location.pathname.includes("signup"));
-  const { searchIp, setSearchIp } = useSearch();
+  // const { searchIp, setSearchIp } = useSearch();
 
   return (
     <header className="header fixed-header">
@@ -15,7 +18,7 @@ export const Navbar = () => {
         {isSidebarVisible && (
           <div
             className="hamburger icon-toggle icon-btn rd-bdr grid-ctr wt-text m-l-3"
-            onClick={() => setShowFilterBar((prev) => !prev)}
+            onClick={() => dispatch(setShowFilterBar('toggle'))}
           >
             <i className="fa fa-bars" aria-hidden="true"></i>
           </div>
@@ -35,7 +38,7 @@ export const Navbar = () => {
             placeholder="Search here"
             id="search-text"
             value={searchIp}
-            onChange={(e) => setSearchIp(e.target.value)}
+            onChange={(e) => dispatch(setSearchIp(e.target.value))}
           />
           <Link to="/">
             <button className="btn secondary-outline-btn m-l-1">Search</button>

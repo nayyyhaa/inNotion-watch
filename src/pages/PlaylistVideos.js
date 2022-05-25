@@ -1,10 +1,10 @@
 import noVideo from "toolkit/assets/search.svg";
 import { useParams } from "react-router-dom";
-import { usePlaylist } from "contexts";
 import { VideoCard } from "components";
+import { useSelector } from "react-redux";
 
 export const PlaylistVideos = () => {
-  const { playlist } = usePlaylist();
+  const { playlist } = useSelector((store) => store.playlistReducer);
   const { id } = useParams();
   const currPlaylist = playlist.find((el) => el.title === id);
   return (

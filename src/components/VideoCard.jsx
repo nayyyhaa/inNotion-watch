@@ -1,26 +1,28 @@
-import { useHistory, useLikes, useModal, usePlaylist, useWatchLater } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { MdClose } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteHistory } from "redux/reducers/historySlice";
+import { deleteLikes } from "redux/reducers/likesSlice";
+import { setModalData, setShowModal } from "redux/reducers/modalSlice";
+import { deletePlaylistData } from "redux/reducers/playlistSlice";
+import { createWatchLater, deleteWatchLater } from "redux/reducers/watchLaterSlice";
 
 export const VideoCard = ({ video, id, cardData }) => {
   const { _id, thumbnail, shortTitle, creator, views, creatorThumbnail } = video;
-  const { setShowModal, setModalData } = useModal();
-  const { watchList, createWatchLater, deleteWatchLater } = useWatchLater();
-  const { deleteLikes } = useLikes();
-  const { deletePlaylistData } = usePlaylist();
-  const { deleteHistory } = useHistory();
-  const index = watchList.findIndex((el) => el._id === video._id);
+  const dispatch = useDispatch();
+  const { watchList } = useSelector((store) => store.watchLaterReducer);
+  const index = watchList?.findIndex((el) => el._id === video._id);
 
   const deleteHandler = (e) => {
     e.preventDefault();
     switch (cardData) {
       case "history":
-        return deleteHistory(video._id);
+        return dispatch(deleteHistory(video._id));
       case "liked":
-        return deleteLikes(video._id);
+        return dispatch(deleteLikes(video._id));
       case "playlist":
-        return deletePlaylistData(id, video._id);
+        return dispatch(deletePlaylistData({ id, videoId: video._id }));
       default:
         return null;
     }
@@ -59,8 +61,8 @@ export const VideoCard = ({ video, id, cardData }) => {
             <button
               className="card-icon-btn icon-btn rd-bdr"
               onClick={() => {
-                setShowModal(true);
-                setModalData(video);
+                dispatch(setShowModal(true));
+                dispatch(setModalData(video));
               }}
             >
               <MdPlaylistPlay />
@@ -68,8 +70,8 @@ export const VideoCard = ({ video, id, cardData }) => {
             <button
               className="p-l-1 card-icon-btn icon-btn rd-bdr"
               onClick={() => {
-                if (index > -1) deleteWatchLater(video._id);
-                else createWatchLater(video);
+                if (index > -1) dispatch(deleteWatchLater(video._id));
+                else dispatch(createWatchLater(video));
               }}
             >
               <MdWatchLater className={`${index > -1 ? "colored-text" : ""}`} />

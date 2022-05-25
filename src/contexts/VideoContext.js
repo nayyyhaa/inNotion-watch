@@ -1,6 +1,4 @@
 import { createContext, useReducer, useContext } from "react";
-import videoData from "toolkit/data/videoData";
-import axios from "axios";
 import { getVideoService } from "services";
 
 const VideoContext = createContext();

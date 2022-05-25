@@ -1,9 +1,9 @@
 import { Video } from "components";
-import { useWatchLater } from "contexts";
+import { useSelector } from "react-redux";
 import noVideo from "toolkit/assets/search.svg";
 
 export const WatchLaterFeed = () => {
-  const { watchList } = useWatchLater();
+  const { watchList } = useSelector((store) => store.watchLaterReducer);
   return (
     <>
       <h1 className="title colored-text centered-text m-t-3">Watch Later</h1>

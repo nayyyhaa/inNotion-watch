@@ -1,18 +1,23 @@
-import { useAuth, useVideo } from "contexts";
+import { useVideo } from "contexts";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Note } from "./Note";
 
 export const NotesSidebar = ({ notes, id }) => {
   const [noteIp, setNoteIp] = useState("");
-  const { user } = useAuth();
+  const { auth } = useSelector((store) => store.authReducer);
+  const { user } = useSelector((store) => store.userReducer);
   const { dispatchVideos } = useVideo();
+  const navigate = useNavigate();
 
   const commentHandler = () => {
-    dispatchVideos({
-      type: "SET_NOTES",
-      payload: { id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: new Date() } },
-    });
+    if (auth.isAuth)
+      dispatchVideos({
+        type: "SET_NOTES",
+        payload: { id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: new Date() } },
+      });
     setNoteIp("");
   };
 
@@ -27,7 +32,13 @@ export const NotesSidebar = ({ notes, id }) => {
           value={noteIp}
           onChange={(e) => setNoteIp(e.target.value)}
         />
-        <button className="btn primary-btn m-h-1" onClick={commentHandler}>
+        <button
+          className="btn primary-btn m-h-1"
+          onClick={() => {
+            if (!auth.isAuth) navigate("/login");
+            commentHandler();
+          }}
+        >
           Add
         </button>
       </div>
