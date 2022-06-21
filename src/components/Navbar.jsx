@@ -5,12 +5,10 @@ import { setShowFilterBar } from "redux/reducers/sidebarSlice";
 
 export const Navbar = () => {
   const location = useLocation();
-  // const { auth } = useAuth();
   const { auth } = useSelector((store) => store.authReducer);
   const { searchIp } = useSelector((store) => store.searchReducer);
   const dispatch = useDispatch();
   const isSidebarVisible = !(location.pathname.includes("login") || location.pathname.includes("signup"));
-  // const { searchIp, setSearchIp } = useSearch();
 
   return (
     <header className="header fixed-header">
@@ -18,7 +16,7 @@ export const Navbar = () => {
         {isSidebarVisible && (
           <div
             className="hamburger icon-toggle icon-btn rd-bdr grid-ctr wt-text m-l-3"
-            onClick={() => dispatch(setShowFilterBar('toggle'))}
+            onClick={() => dispatch(setShowFilterBar("toggle"))}
           >
             <i className="fa fa-bars" aria-hidden="true"></i>
           </div>
