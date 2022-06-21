@@ -35,7 +35,8 @@ Responsive screens with:
 ## Technologies & Concepts used
 
 - React JS
-- React-toolkit
+- Redux-toolkit for state management
+- Mockbee for mock backend
 - React-router-dom
 - -React-toastify
 - JSX
