@@ -1,9 +1,10 @@
 import { VideoCard } from "components";
-import { useLikes } from "contexts";
+import { useSelector } from "react-redux";
 import noVideo from "toolkit/assets/search.svg";
 
 export const LikedFeed = () => {
-  const { likes } = useLikes();
+  const { likes } = useSelector((store) => store.likesReducer);
+
   return (
     <>
       <h1 className="title colored-text centered-text m-t-3">Liked Videos</h1>

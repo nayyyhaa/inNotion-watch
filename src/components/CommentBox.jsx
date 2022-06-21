@@ -1,17 +1,22 @@
-import { useAuth, useVideo } from "contexts";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setComment } from "redux/reducers/videoSlice";
 import userPic from "toolkit/assets/self-love.png";
 
 export const CommentBox = ({ comments, id }) => {
   const [commentIp, setCommentIp] = useState("");
-  const { user } = useAuth();
-  const { dispatchVideos } = useVideo();
+  const { user } = useSelector((store) => store.userReducer);
+  const { auth } = useSelector((store) => store.authReducer);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const commentHandler = () => {
-    dispatchVideos({
-      type: "SET_COMMENT",
-      payload: { id, comments: { firstName: user?.firstName, lastName: user?.lastName, comment: commentIp } },
-    });
+    if (auth.isAuth)
+      dispatch(
+        setComment({ id, comments: { firstName: user?.firstName, lastName: user?.lastName, comment: commentIp } })
+      );
+
     setCommentIp("");
   };
 
@@ -26,7 +31,13 @@ export const CommentBox = ({ comments, id }) => {
           value={commentIp}
           onChange={(e) => setCommentIp(e.target.value)}
         />
-        <button className="btn primary-btn m-h-1" onClick={commentHandler}>
+        <button
+          className="btn primary-btn m-h-1"
+          onClick={() => {
+            if (!auth.isAuth) navigate("/login");
+            commentHandler();
+          }}
+        >
           Add
         </button>
       </div>

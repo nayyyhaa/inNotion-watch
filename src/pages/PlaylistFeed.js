@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
-import { usePlaylist } from "contexts";
 import noVideo from "toolkit/assets/search.svg";
 import { BsFillPlayFill, BsTrashFill } from "react-icons/bs";
 import noVideoIcon from "toolkit/assets/no-video.png";
+import { useDispatch, useSelector } from "react-redux";
+import { deletePlaylist } from "redux/reducers/playlistSlice";
 
 export const PlaylistFeed = () => {
-  const { playlist, deletePlaylist } = usePlaylist();
+  const { playlist } = useSelector((store) => store.playlistReducer);
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -35,7 +37,7 @@ export const PlaylistFeed = () => {
                   className="card-icon-btn icon-btn rd-bdr delete-btn"
                   onClick={(e) => {
                     e.preventDefault();
-                    deletePlaylist(list._id);
+                    dispatch(deletePlaylist(list._id));
                   }}
                 >
                   <BsTrashFill />

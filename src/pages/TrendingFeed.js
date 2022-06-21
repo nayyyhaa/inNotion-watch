@@ -1,7 +1,7 @@
 import { Video } from "components";
-import { useVideo } from "contexts";
+import { useSelector } from "react-redux";
 export const TrendingFeed = () => {
-  const { videos } = useVideo();
+  const { videos } = useSelector((store) => store.videoReducer);
   return (
     <>
       <h1 className="title colored-text centered-text m-t-3">Trending Videos</h1>

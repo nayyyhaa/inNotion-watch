@@ -1,8 +1,8 @@
-import { useAuth } from "contexts/AuthContext";
 import { useLogin } from "custom-hooks";
+import { useSelector } from "react-redux";
 
 export const ProfilePage = () => {
-  const { user } = useAuth();
+  const { user } = useSelector((store) => store.userReducer);
   const { logoutHandler } = useLogin();
   return (
     <>

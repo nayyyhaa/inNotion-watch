@@ -1,9 +1,9 @@
 import { VideoCard } from "components";
-import { useHistory } from "contexts";
+import { useSelector } from "react-redux";
 import noVideo from "toolkit/assets/search.svg";
 
 export const HistoryFeed = () => {
-  const { history } = useHistory();
+  const { history } = useSelector(store => store.historyReducer);
   return (
     <>
       <h1 className="title colored-text centered-text m-t-3">History</h1>

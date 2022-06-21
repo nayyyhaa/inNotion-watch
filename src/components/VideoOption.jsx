@@ -1,16 +1,24 @@
-import { useModal, useWatchLater } from "contexts";
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
-import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setModalData, setShowModal } from "redux/reducers/modalSlice";
+import { createWatchLater, deleteWatchLater } from "redux/reducers/watchLaterSlice";
+
 export const VideoOption = ({ setOptionOpen, video }) => {
-  const { setShowModal, setModalData } = useModal();
-  const { watchList, deleteWatchLater, createWatchLater } = useWatchLater();
-  const index = watchList.findIndex((el) => el._id === video._id);
+  const { watchList } = useSelector((store) => store.watchLaterReducer);
+  const { auth } = useSelector((store) => store.authReducer);
+  const index = watchList?.findIndex((el) => el._id === video._id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="video-option box-shd" onClick={() => setOptionOpen(false)}>
       <p
         onClick={() => {
-          setShowModal(true);
-          setModalData(video);
+          if (!auth.isAuth) navigate("/login");
+          else {
+            dispatch(setShowModal(true));
+            dispatch(setModalData(video));
+          }
         }}
       >
         <MdPlaylistPlay />
@@ -18,8 +26,9 @@ export const VideoOption = ({ setOptionOpen, video }) => {
       </p>
       <p
         onClick={() => {
-          if (index > -1) deleteWatchLater(video._id);
-          else createWatchLater(video);
+          if (!auth.isAuth) navigate("/login");
+          if (index > -1) dispatch(deleteWatchLater(video._id));
+          else dispatch(createWatchLater(video));
         }}
       >
         <MdWatchLater />

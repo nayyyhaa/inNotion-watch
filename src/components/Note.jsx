@@ -1,29 +1,24 @@
 import { BsPenFill, BsTrashFill } from "react-icons/bs";
 import { useState } from "react";
-import { useVideo } from "contexts";
 import { formatDate } from "toolkit/utils";
+import { deleteNote, editNote } from "redux/reducers/videoSlice";
+import { useDispatch } from "react-redux";
 
 export const Note = ({ id, noteEl }) => {
   const { note, noteId, date } = noteEl;
   const [noteIp, setNoteIp] = useState(note);
   const [editModeOn, setEditModeOn] = useState(false);
-  const { dispatchVideos } = useVideo();
+  const dispatch = useDispatch();
 
   const editModeHandler = () => {
     if (editModeOn) {
-      dispatchVideos({
-        type: "EDIT_NOTE",
-        payload: { id, noteId, notes: noteIp },
-      });
+      dispatch(editNote({ id, noteId, notes: noteIp }));
     }
     setEditModeOn((prev) => !prev);
   };
 
   const deleteNoteHandler = () => {
-    dispatchVideos({
-      type: "DELETE_NOTE",
-      payload: { id, noteId },
-    });
+    dispatch(deleteNote({ id, noteId }));
   };
 
   return (

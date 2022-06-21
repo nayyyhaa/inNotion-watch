@@ -12,7 +12,7 @@ export const loginService = async (url, email, password) => {
       throw new Error(res);
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -30,6 +30,6 @@ export const signupService = async (url, email, password, firstName, lastName) =
       throw new Error(res);
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
