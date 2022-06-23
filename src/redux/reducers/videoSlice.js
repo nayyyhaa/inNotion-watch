@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { getVideoService } from "services";
 
@@ -31,6 +31,7 @@ const videoSlice = createSlice({
           ? { ...vid, notes: vid.notes ? [...vid.notes, action.payload.notes] : [action.payload.notes] }
           : vid
       );
+      toast.success("Notes added sucessfully");
     },
     editNote: (state, action) => {
       state.videos = state.videos.map((vid) =>
@@ -43,6 +44,7 @@ const videoSlice = createSlice({
             }
           : vid
       );
+      toast.success("Notes edited sucessfully");
     },
     deleteNote: (state, action) => {
       state.videos = state.videos.map((vid) =>
@@ -53,6 +55,7 @@ const videoSlice = createSlice({
             }
           : vid
       );
+      toast.success("Notes deleted sucessfully");
     },
   },
 });

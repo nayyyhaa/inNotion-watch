@@ -1,6 +1,7 @@
 import { MdPlaylistPlay, MdWatchLater } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { setModalData, setShowModal } from "redux/reducers/modalSlice";
 import { createWatchLater, deleteWatchLater } from "redux/reducers/watchLaterSlice";
 
@@ -14,7 +15,10 @@ export const VideoOption = ({ setOptionOpen, video }) => {
     <div className="video-option box-shd" onClick={() => setOptionOpen(false)}>
       <p
         onClick={() => {
-          if (!auth.isAuth) navigate("/login");
+          if (!auth.isAuth) {
+            toast.error("Log in/ Sign up to begin");
+            navigate("/login");
+          }
           else {
             dispatch(setShowModal(true));
             dispatch(setModalData(video));

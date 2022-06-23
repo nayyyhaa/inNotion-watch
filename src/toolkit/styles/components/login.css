@@ -1,7 +1,12 @@
 .login-content,
 .profile-content {
   background: linear-gradient(to top, var(--COLOR-PRIMARY-XXLIGHT), var(--COLOR-PRIMARY-LIGHT));
+  min-height: 80vh;
+}
+
+.profile-content {
   min-height: 100vh;
+  padding-bottom: 20rem;
 }
 
 .login-actions {
@@ -17,6 +22,13 @@
 
 .form-validated .eye-icon {
   top: 38%;
+}
+
+@media screen and (max-width: 850px) {
+  .profile-content {
+    min-height: 80vh;
+    padding-bottom: 0;
+  }
 }
 
 @media screen and (max-width: 500px) {

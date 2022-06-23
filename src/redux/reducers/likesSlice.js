@@ -25,11 +25,11 @@ export const createLikes = createAsyncThunk("likes/createLikes", async (video) =
       const res = await createLikesService(token, video);
       toast.success("Added to liked videos!");
       return res.likes;
-    }
+    } else toast.error("Log in/ Sign up to begin");
   } catch (err) {
     toast.error("Error in adding to liked videos");
   }
-})
+});
 
 export const deleteLikes = createAsyncThunk("likes/deleteLikes", async (id) => {
   const token = localStorage.getItem("innotion-watch-token");

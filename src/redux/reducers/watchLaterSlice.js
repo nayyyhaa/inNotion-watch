@@ -24,7 +24,7 @@ export const createWatchLater = createAsyncThunk("watchlater/createWatchLater", 
       const res = await createWatchLaterService(token, video);
       toast.success("Added to watch later!");
       return res.watchlater;
-    }
+    } else toast.error("Log in/ Sign up to begin");
   } catch (err) {
     toast.error("Error in adding to watch later");
   }

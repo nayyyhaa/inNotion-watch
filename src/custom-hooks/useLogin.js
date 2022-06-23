@@ -7,7 +7,7 @@ import {
   loginService,
   signupService,
 } from "services";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setAuth } from "redux/reducers/authSlice";
 import { removeUser, setUser } from "redux/reducers/userSlice";
@@ -20,6 +20,8 @@ import { setPlaylist } from "redux/reducers/playlistSlice";
 export const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const from = location?.state?.fromVal?.pathname || "/";
 
   const loginHandler = async (e, email, password) => {
     try {
@@ -39,7 +41,7 @@ export const useLogin = () => {
       const playlistRes = await getPlaylistService(token);
       dispatch(setPlaylist(playlistRes.playlists));
       toast.success(`Welcome ${userData.firstName}!`);
-      navigate("/");
+      navigate(from);
     } catch (err) {
       toast.error("User doesn't exists. Sign up now!");
     }
@@ -68,7 +70,7 @@ export const useLogin = () => {
       localStorage.setItem("user", JSON.stringify(userData));
       dispatch(setAuth({ token, isAuth: true }));
       toast.success(`Welcome ${userData.firstName}!`);
-      navigate("/");
+      navigate(from);
     } catch (err) {
       toast.error("User already exists! Try logging in.");
     }
