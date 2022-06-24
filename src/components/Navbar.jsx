@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { setSearchIp } from "redux/reducers/searchSlice";
@@ -7,6 +8,7 @@ export const Navbar = () => {
   const location = useLocation();
   const { auth } = useSelector((store) => store.authReducer);
   const { searchIp } = useSelector((store) => store.searchReducer);
+  const [userIp, setUserIp] = useState(searchIp);
   const dispatch = useDispatch();
   const isSidebarVisible = !(location.pathname.includes("login") || location.pathname.includes("signup"));
 
@@ -35,11 +37,13 @@ export const Navbar = () => {
             className="input search-nav reset-ip p-05"
             placeholder="Search here"
             id="search-text"
-            value={searchIp}
-            onChange={(e) => dispatch(setSearchIp(e.target.value))}
+            value={userIp}
+            onChange={(e) => setUserIp(e.target.value)}
           />
           <Link to="/">
-            <button className="btn secondary-outline-btn m-l-1">Search</button>
+            <button className="btn secondary-outline-btn m-l-1" onClick={() => dispatch(setSearchIp(userIp))}>
+              Search
+            </button>
           </Link>
         </label>
         <div className="nav-icon-btns row-flex no-wrap">
