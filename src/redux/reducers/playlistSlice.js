@@ -30,7 +30,7 @@ export const createPlaylist = createAsyncThunk("playlist/createPlaylist", async 
     if (isAuth) {
       const res = await createPlaylistService(token, playlist);
       return res.playlists;
-    }
+    } else toast.error("Log in/ Sign up to begin");
   } catch (err) {
     console.error("Error in adding to playlist videos");
     toast.error("Error in creating playlist");
@@ -56,7 +56,7 @@ export const createPlaylistData = createAsyncThunk("playlist/createPlaylistData"
       const res = await createPlaylistDataService(token, id, playlist);
       toast.success("Added to Playlist!");
       return res.playlist;
-    }
+    } else toast.error("Log in/ Sign up to begin");
   } catch (err) {
     console.error(err);
     toast.error("Error in adding to playlist");

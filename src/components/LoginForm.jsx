@@ -78,15 +78,9 @@ export const LoginForm = () => {
               <i className="fa fa-exclamation-circle" aria-hidden="true"></i>Please enter valid input
             </small>
           </div>
-          <div className="field full-wd m-1">
-            <input className="checkbox-input m-r-1" type="checkbox" id="terms" />
-            <label className="m-v-1" htmlFor="terms">
-              Keep me signed in
-            </label>
-          </div>
           <button
             type="submit"
-            className="btn primary-outline-btn w-95p m-1"
+            className="btn primary-outline-btn w-95p m-1 m-t-2"
             onClick={(e) => {
               loginHandler(e, "neha@gmail.com", "test");
               setForm({ email: "neha@gmail.com", password: "test" });
@@ -98,14 +92,13 @@ export const LoginForm = () => {
             <span>LOGIN</span>
           </button>
         </form>
-        <div className="login-actions row-flex m-b-2 full-wd">
-          <p className="cursor">Forgot password?</p>
-          <p>
-            <Link to="/signup" className="cursor colored-text">
-              Sign Up
-            </Link>
-          </p>
-        </div>
+        <p className="login-actions centered-text m-b-2 full-wd">
+          New here?{" "}
+          <Link to="/signup" className="cursor colored-text">
+            Sign up
+          </Link>{" "}
+          now!
+        </p>
       </div>
     </>
   );

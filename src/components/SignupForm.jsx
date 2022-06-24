@@ -101,12 +101,6 @@ export const SignupForm = () => {
             <i className="fa fa-exclamation-circle" aria-hidden="true"></i>Please enter valid input
           </small>
         </div>
-        <div className="field full-wd m-1">
-          <input className="checkbox-input m-r-1" type="checkbox" id="terms" />
-          <label className="m-v-1" htmlFor="terms">
-            Recieve e-mail regarding discounts?
-          </label>
-        </div>
         <button type="submit" className="btn primary-btn w-95p m-1">
           <span>SIGN UP</span>
         </button>

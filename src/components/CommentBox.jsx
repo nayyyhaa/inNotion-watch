@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { setComment } from "redux/reducers/videoSlice";
 import userPic from "toolkit/assets/self-love.png";
 
@@ -16,7 +17,7 @@ export const CommentBox = ({ comments, id }) => {
       dispatch(
         setComment({ id, comments: { firstName: user?.firstName, lastName: user?.lastName, comment: commentIp } })
       );
-
+    else toast.error("Log in/ Sign up to begin");
     setCommentIp("");
   };
 
