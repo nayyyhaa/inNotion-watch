@@ -9,10 +9,11 @@ import { createWatchLater, deleteWatchLater } from "redux/reducers/watchLaterSli
 import { createLikes, deleteLikes } from "redux/reducers/likesSlice";
 import { createHistory } from "redux/reducers/historySlice";
 import { getVideo } from "redux/reducers/videoSlice";
+import { toast } from "react-toastify";
 
 export const SingleVideoFeed = () => {
   const { id } = useParams();
-  const { videos } = useSelector(store => store.videoReducer);
+  const { videos } = useSelector((store) => store.videoReducer);
   let video = videos.find((el) => el._id === id) ?? getVideo(id);
   const { _id, shortTitle, description, creator, views, creatorThumbnail, publishDate, subscribers, comments } = video;
   const { watchList } = useSelector((store) => store.watchLaterReducer);
@@ -63,8 +64,10 @@ export const SingleVideoFeed = () => {
             <p
               className="row-flex cursor"
               onClick={() => {
-                if (!auth.isAuth) navigate("/login");
-                else {
+                if (!auth.isAuth) {
+                  toast.error("Log in/ Sign up to begin");
+                  navigate("/login");
+                } else {
                   dispatch(setShowModal(true));
                   dispatch(setModalData(video));
                 }

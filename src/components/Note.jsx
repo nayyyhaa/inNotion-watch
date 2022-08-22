@@ -1,4 +1,4 @@
-import { BsPenFill, BsTrashFill } from "react-icons/bs";
+import { BsPenFill, BsTrashFill, BsCheckCircleFill } from "react-icons/bs";
 import { useState } from "react";
 import { formatDate } from "toolkit/utils";
 import { deleteNote, editNote } from "redux/reducers/videoSlice";
@@ -24,14 +24,18 @@ export const Note = ({ id, noteEl }) => {
   return (
     <div className="note blue-content p-2 w-90p">
       {editModeOn ? (
-        <input type="text" className="m-v-1 m-b-3" value={noteIp} onChange={(e) => setNoteIp(e.target.value)} />
+        <input type="text" className="input p-1 m-v-1 m-b-3" value={noteIp} onChange={(e) => setNoteIp(e.target.value)} />
       ) : (
         <p className="m-v-1 m-b-3">{note}</p>
       )}
       <div className="note-footer row-flex">
         <small className="inherit-color">{formatDate(date)}</small>
         <div className="note-actions w-5rm row-flex">
-          <BsPenFill className="m-r-1" onClick={editModeHandler} />
+          {editModeOn ? (
+            <BsCheckCircleFill className="m-r-1" onClick={editModeHandler} />
+          ) : (
+            <BsPenFill className="m-r-1" onClick={editModeHandler} />
+          )}
           <BsTrashFill onClick={deleteNoteHandler} />
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { setNotes } from "redux/reducers/videoSlice";
 import { formatDate } from "toolkit/utils";
 import { v4 as uuid } from "uuid";
@@ -15,7 +16,10 @@ export const NotesSidebar = ({ notes, id }) => {
 
   const commentHandler = () => {
     if (auth.isAuth)
-      dispatch(setNotes({ id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: formatDate(new Date()) } }));
+      noteIp && dispatch(
+        setNotes({ id, notes: { noteId: uuid(), email: user?.email, note: noteIp, date: formatDate(new Date()) } })
+      );
+    else toast.error("Log in/ Sign up to begin");
     setNoteIp("");
   };
 
